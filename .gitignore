@@ -3,6 +3,15 @@
 .volta/renders/
 .volta/*.db
 
+# ATLAS internal orchestration data — not for public repos
+.atlas-bridge/
+
+# Large binary concept art (tracked locally only)
+concept/intake/Art/
+concept/intake/audio/
+concept/intake/Cuddle_Pirates_ref/
+concept/intake/Cuddle_Pirates_ref.zip
+
 # Build artifacts
 node_modules/
 dist/
