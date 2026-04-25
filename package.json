@@ -1,0 +1,7 @@
+{
+  "name": "cuddle-pirates",
+  "version": "0.0.1",
+  "description": "Cuddle Pirates — first demo IP for Volta. Stylized 2-4 min animated short.",
+  "private": true,
+  "type": "module"
+}

@@ -1,0 +1,23 @@
+{
+  "project_name": "CuddlePirates",
+  "project_path": "e:/dev/projects/CuddlePirates",
+  "stack": "creative",
+  "bridge_version": "1.0",
+  "pm_type": "cli",
+  "agent_count": 0,
+  "agent_names": [],
+  "task_board_path": "TASK_BOARD.md",
+  "working_context_path": "",
+  "dev_url": null,
+  "test_count": 0,
+  "capabilities": [
+    "demo_ip_for_volta",
+    "stylized_animation",
+    "concept_inventory",
+    "story_bible_canon"
+  ],
+  "atlas_pm_class": "ProjectsPM",
+  "created": "2026-04-25",
+  "consumes": ["Volta"],
+  "depends_on": ["Volta"]
+}

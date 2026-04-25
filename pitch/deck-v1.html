@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Volta — Pitch Deck v1 · Cuddle Pirate Theater</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reset.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/theme/black.css" />
+  <style>
+    :root {
+      --teal:       #4dd4d4;
+      --gold:       #e8c84a;
+      --cream:      #f5f0e8;
+      --dark-navy:  #0d1520;
+      --card-bg:    rgba(255,255,255,0.05);
+      --border:     rgba(77,212,212,0.25);
+    }
+
+    body { background: var(--dark-navy); }
+
+    .reveal .slides { text-align: left; }
+
+    /* ── Typography ── */
+    .reveal h1, .reveal h2, .reveal h3 {
+      font-family: Georgia, 'Times New Roman', serif;
+      text-transform: none;
+      letter-spacing: -0.02em;
+    }
+    .reveal h1 { font-size: 3.2em; color: var(--cream); line-height: 1.1; }
+    .reveal h2 { font-size: 1.55em; color: var(--teal); margin-bottom: 0.3em; }
+    .reveal h3 {
+      font-size: 0.7em; color: var(--gold); font-family: system-ui, sans-serif;
+      font-weight: 400; text-transform: uppercase; letter-spacing: 0.12em;
+      margin-bottom: 0.15em;
+    }
+    .reveal p, .reveal li {
+      font-size: 0.78em; line-height: 1.65; color: var(--cream); opacity: 0.92;
+    }
+    .reveal strong { color: var(--cream); opacity: 1; }
+    .reveal em { color: var(--cream); opacity: 0.85; }
+    .reveal code {
+      font-size: 0.85em; background: rgba(255,255,255,0.08);
+      padding: 0.1em 0.4em; border-radius: 3px; color: var(--teal);
+    }
+
+    /* ── Tables ── */
+    .reveal table {
+      font-size: 0.63em; border-collapse: collapse; width: 100%; margin: 0.4em 0;
+    }
+    .reveal table th {
+      background: rgba(77,212,212,0.12); color: var(--teal);
+      padding: 0.5em 0.8em; text-align: left; font-weight: 600;
+      border-bottom: 1px solid var(--border);
+    }
+    .reveal table td {
+      padding: 0.38em 0.8em; color: var(--cream); opacity: 0.88;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .reveal table tr:last-child td { border-bottom: none; }
+    .reveal table tr.hl td {
+      background: rgba(232,200,74,0.1); color: var(--gold);
+      font-weight: 700; opacity: 1;
+    }
+    .reveal table tr.bad td { color: #ff8888; opacity: 0.9; }
+
+    /* ── Components ── */
+    .divider {
+      width: 50px; height: 2px; background: var(--teal);
+      margin: 0.4em 0 0.8em 0;
+    }
+
+    .pill {
+      display: inline-block;
+      background: rgba(77,212,212,0.1); border: 1px solid var(--border);
+      border-radius: 3px; padding: 0.15em 0.55em;
+      font-size: 0.58em; color: var(--teal);
+      font-family: monospace; margin: 0.1em;
+    }
+
+    .callout {
+      background: var(--card-bg); border-left: 3px solid var(--teal);
+      padding: 0.55em 0.9em; margin: 0.45em 0; border-radius: 0 4px 4px 0;
+    }
+    .callout-gold { border-left-color: var(--gold); }
+    .callout p, .callout li { font-size: 0.75em; margin: 0; line-height: 1.7; }
+
+    .reveal blockquote {
+      background: var(--card-bg); border-left: 3px solid var(--teal);
+      padding: 0.6em 1em; width: 100%; box-sizing: border-box;
+      font-style: italic;
+    }
+    .reveal blockquote p { font-size: 0.82em; line-height: 1.7; }
+
+    /* ── Layout helpers ── */
+    .two-col {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.4em; align-items: start;
+    }
+    .three-col {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.8em; align-items: start;
+    }
+    .four-col {
+      display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 0.8em; align-items: start;
+    }
+
+    /* ── Boxes ── */
+    .box {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 5px; padding: 0.7em 0.9em;
+    }
+    .box .label { font-size: 0.58em; color: var(--teal); text-transform: uppercase; letter-spacing: 0.1em; }
+    .box .val   { font-size: 0.78em; color: var(--cream); margin-top: 0.2em; }
+    .box.good   { border-color: rgba(77,212,212,0.5); background: rgba(77,212,212,0.07); }
+    .box.bad    { border-color: rgba(255,100,100,0.35); background: rgba(255,100,100,0.04); }
+
+    /* ── Big number ── */
+    .big-num {
+      font-family: Georgia, serif; font-size: 2em;
+      color: var(--gold); font-weight: 700; line-height: 1;
+    }
+    .big-num.red { color: #ff8888; }
+
+    /* ── Stage flow bar ── */
+    .stage-flow {
+      display: flex; align-items: center; gap: 0.25em;
+      flex-wrap: wrap; margin: 0.5em 0 0.9em 0;
+    }
+    .stage-flow .s {
+      background: rgba(77,212,212,0.08); border: 1px solid var(--border);
+      padding: 0.25em 0.6em; border-radius: 3px;
+      color: rgba(77,212,212,0.5); font-family: monospace; font-size: 0.62em;
+    }
+    .stage-flow .s.on {
+      background: rgba(77,212,212,0.22); border-color: var(--teal);
+      color: var(--teal);
+    }
+    .stage-flow .arr { color: rgba(77,212,212,0.35); font-size: 0.7em; }
+
+    /* ── Promotion path ── */
+    .promo {
+      font-family: monospace; font-size: 0.6em; line-height: 1;
+    }
+    .promo .node {
+      display: inline-block;
+      background: rgba(77,212,212,0.1); border: 1px solid var(--border);
+      padding: 0.25em 0.7em; border-radius: 3px;
+      color: var(--teal); margin: 0.15em 0;
+    }
+    .promo .node.hero {
+      background: rgba(232,200,74,0.15); border-color: rgba(232,200,74,0.5);
+      color: var(--gold);
+    }
+    .promo .dn {
+      display: block; color: var(--teal); opacity: 0.6; padding: 0.15em 0 0.15em 1.2em;
+    }
+    .promo .ann { color: var(--gold); opacity: 0.75; }
+
+    /* ── Team cards ── */
+    .team-card {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 5px; padding: 0.55em 0.9em; margin: 0.3em 0;
+    }
+    .team-card .name { font-weight: 700; color: var(--cream); font-size: 0.78em; }
+    .team-card .role { color: var(--teal); font-size: 0.58em; text-transform: uppercase; letter-spacing: 0.08em; }
+    .team-card .bio  { color: var(--cream); opacity: 0.65; font-size: 0.63em; margin-top: 0.25em; }
+    .team-card.dim   { opacity: 0.4; border-color: rgba(255,255,255,0.08); }
+
+    /* ── Speaker note inline ── */
+    .snote {
+      background: rgba(232,200,74,0.06); border: 1px solid rgba(232,200,74,0.18);
+      border-radius: 3px; padding: 0.35em 0.7em; font-size: 0.58em;
+      color: var(--gold); opacity: 0.8; margin-top: 0.5em;
+    }
+
+    /* ── Center helper ── */
+    .center { text-align: center; }
+
+    /* ── Compact layout: shrink everything to fit slide bounds ── */
+    .reveal h2 { font-size: 1.18em !important; margin-bottom: 0.08em !important; }
+    .reveal p, .reveal li { font-size: 0.65em !important; line-height: 1.48 !important; }
+    .reveal table { font-size: 0.52em !important; margin: 0.18em 0 !important; }
+    .reveal table th { padding: 0.28em 0.5em !important; }
+    .reveal table td { padding: 0.2em 0.5em !important; }
+    .divider { margin: 0.12em 0 0.38em 0 !important; }
+    .callout { padding: 0.28em 0.65em !important; margin: 0.2em 0 !important; }
+    .callout p, .callout li { font-size: 0.65em !important; line-height: 1.45 !important; }
+    .reveal blockquote { padding: 0.28em 0.75em !important; }
+    .reveal blockquote p { font-size: 0.68em !important; line-height: 1.5 !important; }
+    .two-col { gap: 0.7em !important; }
+    .three-col { gap: 0.5em !important; }
+    .four-col { gap: 0.5em !important; }
+    .box { padding: 0.35em 0.55em !important; }
+    .box .label { font-size: 0.47em !important; }
+    .box .val { font-size: 0.6em !important; margin-top: 0.08em !important; }
+    .big-num { font-size: 1.35em !important; }
+    .stage-flow { margin: 0.18em 0 0.35em 0 !important; }
+    .promo { font-size: 0.5em !important; }
+    .team-card { padding: 0.28em 0.55em !important; margin: 0.12em 0 !important; }
+    .team-card .name { font-size: 0.65em !important; }
+    .team-card .role { font-size: 0.47em !important; }
+    .team-card .bio { font-size: 0.5em !important; margin-top: 0.1em !important; }
+    .snote { font-size: 0.52em !important; padding: 0.28em 0.55em !important; }
+  </style>
+</head>
+
+<body>
+<div class="reveal">
+<div class="slides">
+
+
+<!-- ══════════════════════════════════════════
+     01  TITLE
+══════════════════════════════════════════ -->
+<section class="center" data-background-color="#0d1520">
+  <div style="margin-bottom:0.6em;">
+    <span class="pill">DRAFT v1</span>
+    <span class="pill">2026-04-25</span>
+    <span class="pill">CONFIDENTIAL</span>
+  </div>
+
+  <h1>VOLTA</h1>
+  <p style="font-size:0.95em; color:var(--teal); font-style:italic; margin:0;">
+    AI-augmented animation pipeline on local compute
+  </p>
+
+  <div class="divider" style="margin:0.8em auto;"></div>
+
+  <p style="font-size:0.68em; opacity:0.55;">
+    Presented with&nbsp;&nbsp;<strong style="color:var(--cream); opacity:1;">Cuddle Pirate Theater</strong>&nbsp;&mdash;&nbsp;tech demo IP
+  </p>
+
+  <div class="callout" style="margin-top:1.6em; text-align:left; max-width:560px; margin-left:auto; margin-right:auto;">
+    <p style="margin:0; font-size:0.72em;">
+      <strong style="color:var(--gold);">[ PLAY THE REEL NOW ]</strong><br>
+      Dim the lights. No introduction. Play the vertical slice first.<br>
+      The rest of this deck explains how we built it.
+    </p>
+  </div>
+
+  <aside class="notes">
+    Walk in, dim the lights, start the reel. Say nothing first.
+    After it ends: "That's Volta. Let me show you how we made it."
+  </aside>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     02  THE SHOW
+══════════════════════════════════════════ -->
+<section data-background-color="#0d1520">
+  <h3>The IP</h3>
+  <h2>Cuddle Pirate Theater</h2>
+  <div class="divider"></div>
+
+  <blockquote>
+    <p>"Every night, somewhere between awake and asleep, a band of plushie pirates
+    commandeer bedtime. They dodge the parents, perform ragdoll acrobatics for the
+    children who can't sleep, tell a bedtime story &mdash; and once everyone is out,
+    they steal every pillow and blanket in the room and sail home for the most
+    legendary pillow fight anyone has ever seen."</p>
+  </blockquote>
+
+  <div class="two-col" style="margin-top:0.7em;">
+    <div>
+      <p style="font-size:0.6em; color:var(--gold); text-transform:uppercase; letter-spacing:0.1em;">Format</p>
+      <p style="margin:0 0 0.6em 0;">2&ndash;4 minute animated short &middot; Children&rsquo;s series</p>
+      <p style="font-size:0.6em; color:var(--gold); text-transform:uppercase; letter-spacing:0.1em;">Style</p>
+      <p style="margin:0;">Painterly plush / storybook &mdash; stylized, not photoreal</p>
+    </div>
+    <div>
+      <p style="font-size:0.6em; color:var(--gold); text-transform:uppercase; letter-spacing:0.1em;">Tone</p>
+      <p style="margin:0 0 0.6em 0;"><em>The Muppets</em> meets <em>Pee-wee&rsquo;s Playhouse</em> in a bedroom at 9pm</p>
+      <p style="font-size:0.6em; color:var(--gold); text-transform:uppercase; letter-spacing:0.1em;">Pilot episode</p>
+      <p style="margin:0;"><em>The Sock-topuss</em> &mdash; Juniper&rsquo;s bedroom.<br>One night. One missing sock.</p>
+    </div>
+  </div>
+
+  <div class="callout callout-gold" style="margin-top:0.9em;">
+    <p style="margin:0; font-size:0.78em;">
+      <strong>What you just saw was made through Volta.</strong>
+    </p>
+  </div>
+
+  <aside class="notes">
+    Principals already know Cuddle Pirates per I5. One paragraph to anchor the room, then move on.
+    Don't oversell the show — sell the pipeline that made it.
+  </aside>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     03  THE PROBLEM
+══════════════════════════════════════════ -->
+<section data-background-color="#0d1520">
+  <h3>The landscape</h3>
+  <h2>What independent animation actually costs</h2>
+  <div class="divider"></div>
+
+  <table>
+    <thead><tr><th>Pain point</th><th>Reality</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Pipeline</strong></td>
+        <td>Designed for 200-person studios. Scaled down, it breaks.</td>
+      </tr>
+      <tr>
+        <td><strong>AI tools</strong></td>
+        <td>Black boxes. The artist doesn&rsquo;t own the output. No audit trail.</td>
+      </tr>
+      <tr>
+        <td><strong>Cost visibility</strong></td>
+        <td>You know the invoice. You don&rsquo;t know the per-stage cost until post.</td>
+      </tr>
+      <tr>
+        <td><strong>Hardware</strong></td>
+        <td>Cloud render farms: metered, unpredictable, margin-destroying.</td>
+      </tr>
+      <tr>
+        <td><strong>Iteration speed</strong></td>
+        <td>Waiting on renders to get notes. Notes kill momentum.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout callout-gold" style="margin-top:0.9em;">
+    <p style="margin:0; font-size:0.82em;">
+      Studios at this scale need a <strong>network deal or VC</strong> before a single frame
+      is finished &mdash; or they never get off the ground.
+    </p>
+  </div>
+
+  <p style="margin-top:0.8em; color:var(--teal); font-size:0.9em; font-weight:600;">
+    Volta is the other path.
+  </p>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     04  THE SOLUTION
+══════════════════════════════════════════ -->
+<section data-background-color="#0d1520">
+  <h3>The solution</h3>
+  <h2>Volta</h2>
+  <div class="divider"></div>
+
+  <p style="font-size:0.75em; margin-bottom:0.8em;">
+    AI-augmented production orchestration on owned hardware. One goal:
+    make a <strong>5-person boutique operate like a 50-person pipeline.</strong>
+  </p>
+
+  <table>
+    <thead><tr><th>Principle</th><th>What it means</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Local-first</strong></td>
+        <td>M6 Pro. No cloud meter running on every frame.</td>
+      </tr>
+      <tr>
+        <td><strong>AI-augmented, not AI-driven</strong></td>
+        <td>Every AI step has a human override. The artist is the author.</td>
+      </tr>
+      <tr>
+        <td><strong>Approval-gated</strong></td>
+        <td>Nothing promotes to the next stage without a sign-off. No black boxes.</td>
+      </tr>
+      <tr>
+        <td><strong>Cost-visible</strong></td>
+        <td>Compute hours, AI credits, GPU-seconds &mdash; tracked INGEST to EXPORT.</td>
+      </tr>
+      <tr>
+        <td><strong>Reusable</strong></td>
+        <td>Approved assets live in the per-project catalog. Each episode costs less than the last.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout callout-gold" style="margin-top:0.8em;">
+    <p style="margin:0; font-size:0.75em;">
+      <strong>The moat:</strong> AI orchestration on owned hardware changes the cost structure
+      at the bottom end of the market. A boutique with Volta has the leverage
+      that used to require a studio deal.
+    </p>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     05  PIPELINE — parent + vertical sub-slides
+══════════════════════════════════════════ -->
+<section data-background-color="#0d1520">
+
+  <!-- 5.0 Overview -->
+  <section>
+    <h3>How Cuddle Pirates was built</h3>
+    <h2>The Pipeline</h2>
+    <div class="divider"></div>
+
+    <p style="font-size:0.72em; margin-bottom:0.9em;">
+      Six stages. One project. Every asset in the reel came through this.
+    </p>
+
+    <div class="stage-flow">
+      <span class="s on">INGEST</span><span class="arr">&rarr;</span>
+      <span class="s on">RIG</span><span class="arr">&rarr;</span>
+      <span class="s on">ANIM</span><span class="arr">&rarr;</span>
+      <span class="s on">FX</span><span class="arr">&rarr;</span>
+      <span class="s on">COMP</span><span class="arr">&rarr;</span>
+      <span class="s on">EXPORT</span>
+    </div>
+
+    <div class="three-col" style="margin-top:0.5em;">
+      <div class="box"><div class="label">Concept source</div><div class="val">Midjourney (22 refs)</div></div>
+      <div class="box"><div class="label">3D engine</div><div class="val">Unreal Engine 5</div></div>
+      <div class="box"><div class="label">Local compute</div><div class="val">Apple M6 Pro</div></div>
+      <div class="box"><div class="label">3D base mesh</div><div class="val">Meshy AI</div></div>
+      <div class="box"><div class="label">Rig / cleanup</div><div class="val">Blender &rarr; UE5</div></div>
+      <div class="box"><div class="label">Asset catalog</div><div class="val">Volta .volta/catalog.db</div></div>
+    </div>
+
+    <p style="font-size:0.55em; opacity:0.4; margin-top:0.7em; text-align:center;">
+      &darr;&nbsp; press down to walk through each stage
+    </p>
+
+    <aside class="notes">
+      Overview first, then drill down. For the VFX Producer jump to INGEST for cost visibility.
+      For the Artist jump to RIG. For the Editor jump to EXPORT. Use vertical navigation.
+    </aside>
+  </section>
+
+  <!-- 5.1 INGEST -->
+  <section>
+    <h3>Stage 1 of 6</h3>
+    <h2>INGEST</h2>
+    <div class="divider"></div>
+
+    <div class="stage-flow">
+      <span class="s on">INGEST</span><span class="arr">&rarr;</span>
+      <span class="s">RIG</span><span class="arr">&rarr;</span>
+      <span class="s">ANIM</span><span class="arr">&rarr;</span>
+      <span class="s">FX</span><span class="arr">&rarr;</span>
+      <span class="s">COMP</span><span class="arr">&rarr;</span>
+      <span class="s">EXPORT</span>
+    </div>
+
+    <p style="font-size:0.75em;"><strong>What it does:</strong> Concept art + references &rarr; Volta catalog.
+    Tier assignment, approval queue, cost attribution &mdash; from day one.</p>
+
+    <div class="callout" style="margin:0.7em 0;">
+      <p style="margin:0;">
+        <strong style="color:var(--teal);">Cuddle Pirates example:</strong><br>
+        22 Midjourney character concepts (Sir Fuzzy Drake, Anne Bunny, Captain archetype)
+        &rarr; ingested as <code>tier=REFERENCE</code><br>
+        8 bedroom environment refs &rarr; ingested as <code>tier=REFERENCE</code><br>
+        Every asset in <code>catalog.db</code> with provenance, approval status, and cost attribution.
+      </p>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <p style="font-size:0.6em; color:var(--gold); text-transform:uppercase; letter-spacing:0.1em;">Asset tiers</p>
+        <code style="font-size:0.7em; line-height:2; display:block;">
+          REFERENCE &rarr; CONCEPT &rarr;<br>
+          MODEL &rarr; RIG &rarr; <span style="color:var(--gold);">HERO</span>
+        </code>
+      </div>
+      <div>
+        <p style="font-size:0.6em; color:var(--gold); text-transform:uppercase; letter-spacing:0.1em;">Key guarantee</p>
+        <p style="font-size:0.72em;">Nothing moves to the next stage until it&rsquo;s approved.
+        No &ldquo;we used the wrong version&rdquo; at comp.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5.2 RIG -->
+  <section>
+    <h3>Stage 2 of 6</h3>
+    <h2>RIG</h2>
+    <div class="divider"></div>
+
+    <div class="stage-flow">
+      <span class="s">INGEST</span><span class="arr">&rarr;</span>
+      <span class="s on">RIG</span><span class="arr">&rarr;</span>
+      <span class="s">ANIM</span><span class="arr">&rarr;</span>
+      <span class="s">FX</span><span class="arr">&rarr;</span>
+      <span class="s">COMP</span><span class="arr">&rarr;</span>
+      <span class="s">EXPORT</span>
+    </div>
+
+    <p style="font-size:0.75em;"><strong>What it does:</strong> Approved concept &rarr; 3D.
+    MJ concept &rarr; Meshy base mesh &rarr; Blender cleanup &rarr; custom UE5 stylized rig.</p>
+
+    <div class="callout" style="margin:0.7em 0;">
+      <p style="margin:0;">
+        <strong style="color:var(--teal);">Sir Fuzzy Drake:</strong>
+        MJ captain concept &rarr; Meshy 3D base &rarr; Blender proportion correction &rarr; UE5 custom rig.<br>
+        Stylized-first: plush proportions, huge round eyes, cloth pajama simulation throughout.
+      </p>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <p style="font-size:0.6em; color:var(--gold); text-transform:uppercase; letter-spacing:0.1em;">No MetaHuman dependency</p>
+        <p style="font-size:0.72em;">Hero characters are fully custom. MetaHuman is
+        a fallback seam only for photoreal sub-assets. <strong>The artist owns the shape.</strong></p>
+      </div>
+      <div>
+        <p style="font-size:0.6em; color:var(--gold); text-transform:uppercase; letter-spacing:0.1em;">Cloth sim baked at rig</p>
+        <p style="font-size:0.72em;">Pajama fabric, captain&rsquo;s coat, The Fluffy
+        Dutchman&rsquo;s pillowcase hull &mdash; all sim&rsquo;d at rig stage.
+        ANIM inherits. No re-bake on iteration.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5.3 ANIM -->
+  <section>
+    <h3>Stage 3 of 6</h3>
+    <h2>ANIM</h2>
+    <div class="divider"></div>
+
+    <div class="stage-flow">
+      <span class="s">INGEST</span><span class="arr">&rarr;</span>
+      <span class="s">RIG</span><span class="arr">&rarr;</span>
+      <span class="s on">ANIM</span><span class="arr">&rarr;</span>
+      <span class="s">FX</span><span class="arr">&rarr;</span>
+      <span class="s">COMP</span><span class="arr">&rarr;</span>
+      <span class="s">EXPORT</span>
+    </div>
+
+    <p style="font-size:0.75em;"><strong>What it does:</strong> Hero rig &rarr; final performance.
+    Physical comedy timing, silent heist sequences, cloth interaction with environment.</p>
+
+    <div class="callout" style="margin:0.7em 0;">
+      <p style="margin:0;">
+        <strong style="color:var(--teal);">Infiltration sequence:</strong><br>
+        &bull; Freeze-against-wall: full-body ragdoll physics response to a simulated sound event<br>
+        &bull; Ragdoll acrobatics on the bed: silent comedy &mdash; performance is entirely physical<br>
+        &bull; The bow: the Pirates know they&rsquo;re performing. The animation sells the theatricality.
+      </p>
+    </div>
+
+    <div class="callout callout-gold">
+      <p style="margin:0;">
+        <strong>Key:</strong> ANIM inherits cloth sim from RIG. No re-simulation at this stage.
+        Iterate on performance without re-baking fabric. Notes are same-day.
+      </p>
+    </div>
+  </section>
+
+  <!-- 5.4 FX -->
+  <section>
+    <h3>Stage 4 of 6</h3>
+    <h2>FX</h2>
+    <div class="divider"></div>
+
+    <div class="stage-flow">
+      <span class="s">INGEST</span><span class="arr">&rarr;</span>
+      <span class="s">RIG</span><span class="arr">&rarr;</span>
+      <span class="s">ANIM</span><span class="arr">&rarr;</span>
+      <span class="s on">FX</span><span class="arr">&rarr;</span>
+      <span class="s">COMP</span><span class="arr">&rarr;</span>
+      <span class="s">EXPORT</span>
+    </div>
+
+    <p style="font-size:0.75em;"><strong>What it does:</strong> Soft-body and cloth simulation
+    on hero assets in environment. Secondary FX: dust motes, light shafts, practical in-world effects.</p>
+
+    <div class="callout" style="margin:0.7em 0;">
+      <p style="margin:0;">
+        <strong style="color:var(--teal);">Cuddle Pirates example:</strong><br>
+        &bull; The Fluffy Dutchman&rsquo;s pillowcase hull: cloth sim on a moving prop, legs driving contact underneath<br>
+        &bull; Pajama sleeves catching air during acrobatics<br>
+        &bull; The Dutchman&rsquo;s rigging: rope and sail physics as the ship maneuvers
+      </p>
+    </div>
+
+    <div class="callout callout-gold">
+      <p style="margin:0;">
+        <strong>Scoped deliberately:</strong> No VDB explosions. No rigid body debris.
+        Everything is cloth and soft-body &mdash; well-understood, controllable,
+        iteration-friendly. FX does not blow up the schedule.
+      </p>
+    </div>
+  </section>
+
+  <!-- 5.5 COMP -->
+  <section>
+    <h3>Stage 5 of 6</h3>
+    <h2>COMP</h2>
+    <div class="divider"></div>
+
+    <div class="stage-flow">
+      <span class="s">INGEST</span><span class="arr">&rarr;</span>
+      <span class="s">RIG</span><span class="arr">&rarr;</span>
+      <span class="s">ANIM</span><span class="arr">&rarr;</span>
+      <span class="s">FX</span><span class="arr">&rarr;</span>
+      <span class="s on">COMP</span><span class="arr">&rarr;</span>
+      <span class="s">EXPORT</span>
+    </div>
+
+    <p style="font-size:0.75em;"><strong>What it does:</strong> Environment + character + FX &rarr; final image.
+    Bedroom lighting rig, atmosphere, two competing light sources that drive the comedy.</p>
+
+    <div class="callout" style="margin:0.7em 0;">
+      <p style="margin:0;">
+        <strong style="color:var(--teal);">Two light sources as story devices:</strong><br>
+        &bull; <strong style="color:#e8903a;">Warm hall light (threat)</strong> &mdash; orange, hard-edged, moves when Mom is moving<br>
+        &bull; <strong style="color:#8ab4f0;">Cool window moonlight (safe)</strong> &mdash; blue-grey, soft, always present<br><br>
+        The freeze-against-wall beat is a lighting cut.
+        Warm light creeps into frame &rarr; Pirates freeze. Light retreats &rarr; they exhale.
+      </p>
+    </div>
+
+    <p style="font-size:0.72em; margin-top:0.5em;">
+      All COMP in UE5. Handcrafted lookdev &mdash; not procedural generation.
+    </p>
+  </section>
+
+  <!-- 5.6 EXPORT -->
+  <section>
+    <h3>Stage 6 of 6</h3>
+    <h2>EXPORT</h2>
+    <div class="divider"></div>
+
+    <div class="stage-flow">
+      <span class="s">INGEST</span><span class="arr">&rarr;</span>
+      <span class="s">RIG</span><span class="arr">&rarr;</span>
+      <span class="s">ANIM</span><span class="arr">&rarr;</span>
+      <span class="s">FX</span><span class="arr">&rarr;</span>
+      <span class="s">COMP</span><span class="arr">&rarr;</span>
+      <span class="s on">EXPORT</span>
+    </div>
+
+    <p style="font-size:0.75em;"><strong>What it does:</strong> UE5 &rarr; editorial-ready delivery. Four lanes. Always-on.</p>
+
+    <table>
+      <thead><tr><th>Output</th><th>Format</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>4K master frames</td><td>EXR sequence</td><td>Full-float, comp-ready, re-deliverable to any future spec</td></tr>
+        <tr><td>MP4 dailies</td><td>H.264 / H.265</td><td>Review-ready, same-day, no transcode step</td></tr>
+        <tr><td>Avid round-trip</td><td>AAF + audio stems</td><td>Timecoded, multi-track, drops into Media Composer</td></tr>
+        <tr><td>DaVinci round-trip</td><td>XML + audio stems</td><td>Timeline-accurate, color-managed for Resolve</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-gold" style="margin-top:0.7em;">
+      <p style="margin:0;">
+        Volta doesn&rsquo;t ask which NLE you use. All four formats ship on every export.
+        Changing tools mid-production is a config switch, not a re-pipeline.<br>
+        <strong>Audio stems:</strong> dialogue / score / SFX delivered discretely. Full separation from day one.
+      </p>
+    </div>
+
+    <aside class="notes">
+      Ask the editor their NLE before the pitch if possible. Either way, the deck covers both.
+      "We built Avid and DaVinci lanes. You tell us which lane you drive and we hand you the keys."
+    </aside>
+  </section>
+
+</section><!-- end pipeline -->
+
+
+<!-- ══════════════════════════════════════════
+     06  COST MODEL
+══════════════════════════════════════════ -->
+<section data-background-color="#0d1520">
+
+  <!-- 6a: per-stage breakdown -->
+  <section>
+    <h3>For the VFX Producer</h3>
+    <h2>The Cost Model</h2>
+    <div class="divider"></div>
+
+    <p style="font-size:0.56em; opacity:0.6; margin-bottom:0.25em;">
+      Benchmarked estimates &mdash; M6 Pro + current Meshy / ComfyUI credit pricing.
+      Direct compute costs only. Artist time is founder-rate and excluded.
+    </p>
+
+    <table>
+      <thead>
+        <tr><th>Stage</th><th>Compute</th><th>AI credits</th><th>Est. cost</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>INGEST (22 concept refs)</td><td>15 min</td><td>&mdash;</td><td>&lt; $1</td></tr>
+        <tr><td>RIG &mdash; Sir Fuzzy Drake</td><td>8 hrs</td><td>10 Meshy</td><td>~$8</td></tr>
+        <tr><td>RIG &mdash; Juniper&rsquo;s Bedroom</td><td>6 hrs</td><td>&mdash;</td><td>~$5</td></tr>
+        <tr><td>ANIM &mdash; infiltration sequence</td><td>10 hrs</td><td>&mdash;</td><td>~$3</td></tr>
+        <tr><td>FX &mdash; cloth sim passes</td><td>4 hrs</td><td>&mdash;</td><td>~$7</td></tr>
+        <tr><td>COMP &mdash; bedroom lighting</td><td>5 hrs</td><td>&mdash;</td><td>~$10</td></tr>
+        <tr><td>EXPORT &mdash; 4K + MP4 dailies</td><td>45 min</td><td>&mdash;</td><td>~$1</td></tr>
+        <tr class="hl"><td>TOTAL &mdash; 30&ndash;60s reel</td><td>~34 hrs</td><td>10 credits</td><td>~$35</td></tr>
+      </tbody>
+    </table>
+
+    <div class="snote" style="margin-top:0.4em;">Cost = Meshy credits + marginal M6 power draw. Hardware owned and amortized.</div>
+
+    <aside class="notes">
+      Walk through each line. The hero rig ($8) and comp ($10) are the biggest line items.
+      Then hit the TOTAL: $35 for a 30-60s reel. Let that land before moving to the next slide.
+    </aside>
+  </section>
+
+  <!-- 6b: comparison -->
+  <section>
+    <h3>For the VFX Producer</h3>
+    <h2>Volta vs. Alternatives</h2>
+    <div class="divider"></div>
+
+    <div class="four-col" style="margin-top:0.4em;">
+      <div class="box good center">
+        <div class="big-num">$35</div>
+        <div class="label" style="margin-top:0.12em;">Volta on M6<br>30&ndash;60s reel</div>
+      </div>
+      <div class="box good center">
+        <div class="big-num">~$100</div>
+        <div class="label" style="margin-top:0.12em;">Volta on M6<br>full episode</div>
+      </div>
+      <div class="box bad center">
+        <div class="big-num red">~$1,100</div>
+        <div class="label" style="margin-top:0.12em;">Cloud render<br>equivalent</div>
+      </div>
+      <div class="box bad center">
+        <div class="big-num red">~$3,500</div>
+        <div class="label" style="margin-top:0.12em;">Traditional<br>outsource</div>
+      </div>
+    </div>
+
+    <div class="callout callout-gold" style="margin-top:0.5em;">
+      <p style="margin:0;">
+        Every approved asset in episode 1 carries forward to episode 2.
+        The per-episode cost drops with every episode in the series.
+        <strong>The cloud bill doesn&rsquo;t.</strong>
+      </p>
+    </div>
+
+    <div class="callout" style="margin-top:0.3em;">
+      <p style="margin:0;">
+        5&times; linear scale: ~$175 (no asset reuse) &nbsp;&middot;&nbsp;
+        With catalog reuse: ~$90&ndash;110 &nbsp;&middot;&nbsp;
+        AWS Deadline equivalent: ~$900&ndash;1,200 &nbsp;&middot;&nbsp;
+        Traditional outsource: ~$2,000&ndash;5,000
+      </p>
+    </div>
+
+    <aside class="notes">
+      Let the $35 vs $1,100 land. Then: "The $35 gets cheaper every episode &mdash;
+      rigs are already approved. The cloud bill resets every time."
+      On artist time: "Founder-rate now. Improves when we bring paid talent
+      because the pipeline overhead is already zero."
+    </aside>
+  </section>
+
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     07  ARTIST'S VIEW
+══════════════════════════════════════════ -->
+<section data-background-color="#0d1520">
+  <h3>For the Multi-disciplinary Artist</h3>
+  <h2>Concept to hero rig &mdash; in a day</h2>
+  <div class="divider"></div>
+
+  <div class="two-col">
+    <div>
+      <p style="font-size:0.6em; color:var(--gold); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.5em;">
+        Sir Fuzzy Drake &mdash; promotion path
+      </p>
+      <div class="promo">
+        <div class="node">MJ concept image (existing)</div>
+        <div class="dn">&darr; <span class="ann">INGEST &mdash; 5 min, human review</span></div>
+        <div class="node">catalog.db &middot; tier=REFERENCE</div>
+        <div class="dn">&darr; <span class="ann">APPROVAL: promote to CONCEPT</span></div>
+        <div class="node">Meshy 3D base mesh generation</div>
+        <div class="dn">&darr; <span class="ann">~20 min &middot; automated + human QC</span></div>
+        <div class="node">Blender cleanup + proportion correction</div>
+        <div class="dn">&darr; <span class="ann">human artist &middot; 2&ndash;4 hrs</span></div>
+        <div class="node">catalog.db &middot; tier=MODEL</div>
+        <div class="dn">&darr; <span class="ann">APPROVAL: promote to RIG</span></div>
+        <div class="node">UE5 custom stylized rig</div>
+        <div class="dn">&darr; <span class="ann">human artist &middot; 3&ndash;4 hrs</span></div>
+        <div class="node hero">HERO &mdash; production-ready &#10003;</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="callout" style="margin-bottom:0.7em;">
+        <p style="margin:0;">
+          <strong style="color:var(--teal);">Total elapsed:</strong> 1 day, one artist.<br>
+          <strong style="color:var(--teal);">AI steps:</strong> Meshy 3D base (20 min). That&rsquo;s it.<br>
+          <strong style="color:var(--teal);">Everything else:</strong> Human. Supervised. Approved. Owned.
+        </p>
+      </div>
+
+      <table>
+        <thead><tr><th>AI does</th><th>AI does NOT do</th></tr></thead>
+        <tbody>
+          <tr><td>Generate rough 3D base</td><td>Make creative decisions</td></tr>
+          <tr><td>Suggest asset organization</td><td>Approve anything</td></tr>
+          <tr><td>Track cost per asset</td><td>Generate final animation</td></tr>
+          <tr><td>Surface approval queue</td><td>Replace the artist</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout callout-gold" style="margin-top:0.7em;">
+        <p style="margin:0;">
+          The approval gate is real. Nothing promotes without a human decision.
+          Your name is on the asset. Your choices are in the catalog.
+          The audit trail runs concept to export.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <aside class="notes">
+    Their primary concern: creative control. "Not a MetaHuman wrapper. The stylized rig is
+    yours from the first proportion correction in Blender. The 20-minute Meshy step is
+    the entire AI footprint on this character."
+    Close with: "Which stage do you want to own?"
+  </aside>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     08  REEL REVISITED
+══════════════════════════════════════════ -->
+<section class="center" data-background-color="#0d1520">
+  <h3>What you saw</h3>
+  <h2 style="font-size:2.2em;">The reel is the pipeline.</h2>
+  <div class="divider" style="margin:0.5em auto;"></div>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.9em; margin:0.9em auto; text-align:left; max-width:620px;">
+    <div class="box">
+      <div class="label">Demo environment</div>
+      <div class="val">Juniper&rsquo;s bedroom</div>
+    </div>
+    <div class="box">
+      <div class="label">Demo hero character</div>
+      <div class="val">Sir Fuzzy Drake</div>
+    </div>
+    <div class="box">
+      <div class="label">Demo hero prop</div>
+      <div class="val">The Fluffy Dutchman</div>
+    </div>
+    <div class="box">
+      <div class="label">Demo animation</div>
+      <div class="val">The infiltration sequence</div>
+    </div>
+  </div>
+
+  <div class="callout callout-gold" style="max-width:540px; margin:0 auto;">
+    <p style="margin:0; font-size:0.85em; text-align:center;">
+      This is not a capability roadmap.<br>
+      <strong>This is what Volta does.</strong>
+    </p>
+  </div>
+
+  <p style="margin-top:0.8em; font-size:0.55em; opacity:0.35;">
+    [ play the reel again if the room wants it ]
+  </p>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     09  THE TEAM
+══════════════════════════════════════════ -->
+<section data-background-color="#0d1520">
+  <h3>The founders</h3>
+  <h2>The Team</h2>
+  <div class="divider"></div>
+
+  <div class="team-card" style="border-color:rgba(77,212,212,0.4);">
+    <div class="role">Pipeline Architect &middot; Studio Lead</div>
+    <div class="name">Andy Rose</div>
+    <div class="bio">
+      Mocap Post Supervisor, Lightspeed LA. Vicon / OptiTrack / MotionBuilder pipeline background.
+      Built Volta on M6 from scratch. Running the studio end-to-end through Q3 2026.
+    </div>
+  </div>
+
+  <div class="team-card">
+    <div class="role">VFX Producer</div>
+    <div class="name">Mike</div>
+    <div class="bio">Production management &mdash; cost model, approval workflow, floor operations.</div>
+  </div>
+
+  <div class="team-card">
+    <div class="role">3D Artist &middot; Multi-discipline</div>
+    <div class="name">Matthew</div>
+    <div class="bio">Creative execution &mdash; rigging, lookdev, animation performance.</div>
+  </div>
+
+  <div class="team-card">
+    <div class="role">Editor</div>
+    <div class="name">Jessica</div>
+    <div class="bio">Editorial and delivery &mdash; cut, mix, export pipeline.</div>
+  </div>
+
+  <div class="team-card dim">
+    <div class="role">Senior VP Supervisor &mdash; Wave 2</div>
+    <div class="name">[ Principal 4 ]</div>
+    <div class="bio">Technical oversight &mdash; joins after wave 1 pitches land.</div>
+  </div>
+
+  <aside class="notes">
+    Fill in names and bios before the final presentation.
+    Wave 2 stays grayed out intentionally — building in phases, not overclaiming.
+  </aside>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     10  THE ASK
+══════════════════════════════════════════ -->
+<section data-background-color="#0d1520">
+  <h3>What this meeting is</h3>
+  <h2>The Ask</h2>
+  <div class="divider"></div>
+
+  <div class="two-col">
+    <div>
+      <p style="font-size:0.6em; color:var(--gold); text-transform:uppercase; letter-spacing:0.1em;">What joining means</p>
+      <div class="callout">
+        <p style="margin:0; line-height:2;">
+          <strong>Equity partnership.</strong> No salaries in the garage phase.<br>
+          Bootstrapped from Andy&rsquo;s savings.<br>
+          &bull; You are a founder, not a hire<br>
+          &bull; IP we produce is studio IP &mdash; owned together<br>
+          &bull; Volta is the asset; content proves it
+        </p>
+      </div>
+
+      <p style="font-size:0.6em; color:var(--gold); text-transform:uppercase; letter-spacing:0.1em; margin-top:0.8em;">
+        Pitch date
+      </p>
+      <div style="display:flex; align-items:baseline; gap:0.3em;">
+        <span class="big-num">Q3</span>
+        <span style="font-size:1.6em; color:var(--cream);">2026</span>
+      </div>
+      <p style="font-size:0.65em; opacity:0.6; margin-top:0.2em;">
+        The reel is the deliverable.<br>
+        The reel proves the pipeline.<br>
+        The pipeline proves the studio.
+      </p>
+    </div>
+
+    <div>
+      <p style="font-size:0.6em; color:var(--gold); text-transform:uppercase; letter-spacing:0.1em;">What&rsquo;s built today</p>
+      <table>
+        <tbody>
+          <tr><td>Volta pipeline (INGEST &rarr; EXPORT)</td><td style="color:var(--teal);">In dev</td></tr>
+          <tr><td>Cuddle Pirates project catalog</td><td style="color:var(--teal);">Initialized</td></tr>
+          <tr><td>Story bible &mdash; pilot episode</td><td style="color:var(--teal);">Written</td></tr>
+          <tr><td>22 MJ concept references</td><td style="color:var(--teal);">Cataloged</td></tr>
+          <tr><td>M6 local compute</td><td style="color:var(--gold);">In progress</td></tr>
+          <tr><td>Demo reel (vertical slice)</td><td style="color:var(--gold);">Q3 target</td></tr>
+        </tbody>
+      </table>
+
+      <p style="font-size:0.6em; color:var(--gold); text-transform:uppercase; letter-spacing:0.1em; margin-top:0.8em;">
+        18 months from now
+      </p>
+      <div class="callout" style="font-size:0.7em;">
+        &bull; One completed animated short<br>
+        &bull; Proven, documentable pipeline<br>
+        &bull; Enough IP to shop the series<br>
+        &bull; A cost model that doesn&rsquo;t need a network deal first
+      </div>
+    </div>
+  </div>
+
+  <p style="text-align:center; margin-top:0.9em; font-size:1.1em; color:var(--gold); font-weight:700; letter-spacing:0.06em;">
+    Let&rsquo;s talk.
+  </p>
+</section>
+
+
+</div><!-- .slides -->
+</div><!-- .reveal -->
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    controls: true,
+    controlsTutorial: true,
+    progress: true,
+    center: false,
+    transition: 'fade',
+    transitionSpeed: 'fast',
+    backgroundTransition: 'fade',
+    slideNumber: 'c/t',
+    showSlideNumber: 'speaker',
+    width: 1280,
+    height: 800,
+    margin: 0.04,
+    minScale: 0.05,
+    maxScale: 2.0,
+    plugins: []
+  });
+</script>
+</body>
+</html>

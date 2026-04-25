@@ -1,0 +1,33 @@
+# Volta per-project catalog runtime (large binary cache)
+.volta/cache/
+.volta/renders/
+.volta/*.db
+
+# Build artifacts
+node_modules/
+dist/
+build/
+
+# Editor / OS
+.vscode/
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+
+# Local env
+.env
+.env.local
+
+# Render outputs
+*.exr
+*.mp4
+*.mov
+*.wav
+*.aif
+
+# DCC scene autosaves
+*.blend1
+*.blend2
+*.ma~
+*.mb.bak

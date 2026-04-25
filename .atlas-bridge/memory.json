@@ -1,0 +1,80 @@
+{
+  "project_name": "CuddlePirates",
+  "bridge_version": "1.0",
+  "last_updated": "2026-04-25",
+  "last_atlas_sync": null,
+  "session_count": 0,
+  "health": {
+    "status": "scaffolding",
+    "days_since_push": 0,
+    "open_pr_count": 0,
+    "last_commit_msg": "scaffold (S39)",
+    "last_commit_author": "andrewlrose"
+  },
+  "status_summary": "Demo IP for Volta. Stylized 2-4 min animated short targeted at Q3 2026 principals' pitch. Visual style locked (painterly/storybook); narrative canon awaits Round 2 Section G.",
+  "open_tasks": [
+    {
+      "id": "cp-001",
+      "title": "Fill Round 2 Section G (Q1-Q5) — IP definition",
+      "priority": "P1",
+      "status": "blocked",
+      "blocked_on": "user input"
+    },
+    {
+      "id": "cp-002",
+      "title": "Promote Midjourney references into Volta catalog as REFERENCE-tier assets",
+      "priority": "P2",
+      "status": "open",
+      "blocked_on": "Volta per-project catalog migration (~/.volta -> <project>/.volta)"
+    },
+    {
+      "id": "cp-003",
+      "title": "Decide stylized rig pipeline",
+      "priority": "P1",
+      "status": "closed",
+      "resolution": "Custom stylized rigs default; MetaHuman as fallback abstraction seam (K3 locked 2026-04-25)"
+    },
+    {
+      "id": "cp-004",
+      "title": "Get answers from principals: VP Supervisor gold-standard pipeline (I3); FX Editor toolchain + round-trip format (I4)",
+      "priority": "P2",
+      "status": "open",
+      "blocked_on": "principal conversations"
+    },
+    {
+      "id": "cp-005",
+      "title": "Stand up Concept->Mesh->UE5 lookdev path in Volta (per K4)",
+      "priority": "P1",
+      "status": "open",
+      "blocked_on": "Volta runner.py + per-project catalog"
+    }
+  ],
+  "blocked_tasks": [],
+  "recent_decisions": [
+    {
+      "date": "2026-04-25",
+      "decision": "Visual style is stylized painterly/storybook, NOT photoreal — settles Q21 from Round 2",
+      "evidence": "20 MJ generations + 2 desktop saves all in painterly/illustrated mode; big-eyed plush captains, dreamlike teal/gold palette"
+    },
+    {
+      "date": "2026-04-25",
+      "decision": "Concept materials referenced by absolute path, not duplicated into project tree",
+      "rationale": "Source images live in OneDrive backup; Volta catalog will import them as REFERENCE-tier when per-project catalog is wired"
+    },
+    {
+      "date": "2026-04-25",
+      "decision": "K3 LOCKED — custom stylized rigs are the default for hero characters; MetaHuman is the fallback abstraction seam, not the default",
+      "rationale": "Photoreal-engineered MetaHuman fights the painterly/storybook aesthetic. Demonstrating speed (artist principal) on a MetaHuman would weaken the pitch."
+    },
+    {
+      "date": "2026-04-25",
+      "decision": "K4 LOCKED — environment approach is Concept (Midjourney) -> Mesh (Meshy/photogrammetry) -> handcrafted UE5 lookdev. Pure UE5 PCG rejected.",
+      "rationale": "PCG procedural fights the painterly aesthetic; concept-driven workflow keeps the look-dev lane in the artist principal's hands."
+    },
+    {
+      "date": "2026-04-25",
+      "decision": "Open principal-routed questions tracked in docs/principal-questions.md (I3, I4)",
+      "rationale": "Keeps questionnaire-locked answers separate from items that need a real conversation with the four principals."
+    }
+  ]
+}
