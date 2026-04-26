@@ -1,9 +1,9 @@
 {
   "project_name": "CuddlePirates",
   "bridge_version": "1.0",
-  "last_updated": "2026-04-25",
+  "last_updated": "2026-04-26",
   "last_atlas_sync": null,
-  "session_count": 0,
+  "session_count": 2,
   "health": {
     "status": "scaffolding",
     "days_since_push": 0,
@@ -11,14 +11,14 @@
     "last_commit_msg": "scaffold (S39)",
     "last_commit_author": "andrewlrose"
   },
-  "status_summary": "Demo IP for Volta. Stylized 2-4 min animated short targeted at Q3 2026 principals' pitch. Visual style locked (painterly/storybook); narrative canon awaits Round 2 Section G.",
+  "status_summary": "Round 2 answered (G\u2013M, 2026-04-26). Deck deployed to GitHub Pages (S39). Principal outreach written for Mike/Matthew/Jessica. Active: update deck with G1\u2013G3 canon, await principal responses (I3, I4), wire Concept\u2192Mesh\u2192UE5 path in Volta.",
   "open_tasks": [
     {
       "id": "cp-001",
-      "title": "Fill Round 2 Section G (Q1-Q5) — IP definition",
+      "title": "Fill Round 2 Section G (Q1-Q5) \u2014 IP definition",
       "priority": "P1",
-      "status": "blocked",
-      "blocked_on": "user input"
+      "status": "closed",
+      "resolution": "G1\u2013G4 locked 2026-04-26 via docs/round2-answers.md. G5 (IP ownership) open \u2014 Andy's call."
     },
     {
       "id": "cp-002",
@@ -47,6 +47,13 @@
       "priority": "P1",
       "status": "open",
       "blocked_on": "Volta runner.py + per-project catalog"
+    },
+    {
+      "id": "cp-006",
+      "title": "Update deck with Section G canon (G1 one-para pitch slide, G2 hero asset list, G3 story moment)",
+      "priority": "P1",
+      "status": "open",
+      "blocked_on": null
     }
   ],
   "blocked_tasks": [],
@@ -75,6 +82,11 @@
       "date": "2026-04-25",
       "decision": "Open principal-routed questions tracked in docs/principal-questions.md (I3, I4)",
       "rationale": "Keeps questionnaire-locked answers separate from items that need a real conversation with the four principals."
+    },
+    {
+      "date": "2026-04-26",
+      "decision": "Round 2 (Sections G\u2013M) fully answered and processed. G1\u2013G4 locked; G5 IP ownership pending Andy's call. Principal-routed I3 and I4 remain open.",
+      "rationale": "Closes the questionnaire phase. Next work: update deck with G1\u2013G3 content, then wire Concept\u2192Mesh\u2192UE5 path in Volta."
     }
   ]
 }

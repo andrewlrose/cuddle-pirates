@@ -10,7 +10,7 @@
 
 ## Status
 
-🟡 **Scaffolded 2026-04-25 (S39)** — directory tree and bridge in place; story bible seeded from 2023 Midjourney concept materials and visual analysis. Section G of the Round 2 questionnaire is on hold pending IP definition; once filled, story-bible files get rewritten from placeholders to canon.
+� **Round 2 complete (2026-04-26)** — all 30 questions answered and locked in [`docs/round2-answers.md`](docs/round2-answers.md). Pitch deck live at https://andrewlrose.github.io/cuddle-pirates/pitch/deck-v1.html. G1–G4 canon locked; G5 (IP ownership) pending Andy's call. Principal outreach written for Mike/Matthew/Jessica.
 
 ## Layout
 
@@ -36,17 +36,19 @@ CuddlePirates/
 └── .gitignore
 ```
 
-## Pending (must fill before pitch)
+## Active work items
 
-The following questions are **HOLD** until Section G of Round 2 is answered:
+| ID | Item | Status |
+|----|------|--------|
+| cp-006 | Update deck with G1 (one-para pitch), G2 (hero asset list), G3 (story moment) | Open |
+| G5 | IP ownership decision (solo / Andy+Amanda / studio) | Andy's call |
+| I3 | VP Supervisor: gold-standard pipeline reference | Awaiting principal |
+| I4 | FX Editor: NLE toolchain + round-trip format | Awaiting principal |
+| cp-005 | Wire Concept→Mesh→UE5 lookdev path in Volta | Blocked: Volta runner.py |
+| cp-002 | Promote MJ references into Volta catalog as REFERENCE-tier assets | Blocked: per-project catalog |
 
-- **Q1** — One-paragraph pitch (genre, audience, tone, hook)
-- **Q2** — Hero character / environment / prop counts for the demo reel
-- **Q3** — Story moment / vertical slice (30s teaser vs 90s trailer)
-- **Q4** — ✅ resolved by visual analysis: stylized, NOT photoreal
-- **Q5** — IP ownership (solo / Andy+Amanda / studio)
-
-See [`docs/round2-answers.md`](docs/round2-answers.md) for everything else.
+See [`docs/round2-answers.md`](docs/round2-answers.md) for all locked answers (Sections G–M).
+See [`docs/principal-questions.md`](docs/principal-questions.md) for I3 and I4 detail.
 
 ## Current concept material (2023-10 vintage)
 
