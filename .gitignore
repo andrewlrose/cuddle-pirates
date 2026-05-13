@@ -21,6 +21,7 @@ build/
 .vscode/
 .DS_Store
 Thumbs.db
+__MACOSX/
 *.tmp
 *.swp
 

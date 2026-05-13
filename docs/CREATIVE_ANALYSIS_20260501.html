@@ -1,0 +1,913 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cuddle Pirates — Creative Analysis &amp; Merger Proposals</title>
+<style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:   #0D1F3C;
+  --blue:   #1E4D7B;
+  --mid:    #4A7FAA;
+  --rule:   #CBD5E1;
+  --bg:     #F7F9FB;
+  --text:   #1A1F2E;
+  --muted:  #596577;
+  --gold:   #B8860B;
+  --gold-lt:#F5E6B0;
+  --orig:   #1E4D7B;
+  --ld:     #7B2D1E;
+  --ld-bg:  #FDF1EE;
+  --orig-bg:#EDF3FA;
+}
+
+body {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 11pt;
+  line-height: 1.65;
+  color: var(--text);
+  background: #8A9BB5;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.page {
+  width: 8.5in;
+  background: #fff;
+  margin: 0.4in auto;
+  box-shadow: 0 6px 32px rgba(0,0,0,.25);
+  padding: 0.75in 0.85in 0.7in;
+  position: relative;
+}
+
+@page { size: 8.5in 11in; margin: 0; }
+@media print {
+  body { background: #fff; }
+  .page {
+    width: 8.5in; margin: 0;
+    box-shadow: none;
+    padding: 0.75in 0.85in 0.7in;
+    page-break-after: always;
+    min-height: 11in;
+  }
+  .page:last-child { page-break-after: avoid; }
+  .no-break { page-break-inside: avoid; }
+}
+
+h1 { font-size: 28pt; font-weight: 700; color: var(--navy); line-height: 1.1; letter-spacing: -0.02em; }
+h2 { font-size: 15pt; font-weight: 700; color: var(--navy); margin: 0.35in 0 0.12in; letter-spacing: -0.01em; }
+h2:first-child { margin-top: 0; }
+h3 { font-size: 12pt; font-weight: 700; color: var(--blue); margin: 0.22in 0 0.08in; }
+h4 { font-size: 9pt; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); margin: 0.14in 0 0.05in; }
+p  { margin-bottom: 0.1in; }
+p:last-child { margin-bottom: 0; }
+
+hr { border: none; border-top: 1px solid var(--rule); margin: 0.3in 0; }
+
+.cover-flag {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 8pt;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.5in;
+}
+.cover-kicker {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 10pt;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 0.1in;
+}
+.cover-rule {
+  width: 0.6in; height: 3px;
+  background: var(--gold);
+  border-radius: 2px;
+  margin: 0.2in 0 0.25in;
+}
+.cover-lede {
+  font-size: 12pt;
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 5.5in;
+  margin-bottom: 0.4in;
+  font-style: italic;
+}
+.cover-meta {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 9pt;
+  color: var(--muted);
+  border-top: 1px solid var(--rule);
+  padding-top: 0.14in;
+  display: flex;
+  gap: 0.35in;
+}
+.cover-meta strong { color: var(--text); }
+
+.position {
+  background: var(--navy);
+  color: #fff;
+  padding: 0.18in 0.22in;
+  border-radius: 4px;
+  font-size: 11pt;
+  line-height: 1.6;
+  margin: 0.2in 0;
+  font-style: italic;
+}
+.position strong { color: var(--gold-lt); font-style: normal; }
+
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 9.5pt;
+  margin: 0.12in 0;
+}
+.compare-table th {
+  padding: 9px 12px 8px;
+  text-align: left;
+  font-size: 9pt;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border-bottom: 2px solid var(--navy);
+}
+.compare-table th.th-orig { background: var(--orig-bg); color: var(--orig); }
+.compare-table th.th-ld   { background: var(--ld-bg);   color: var(--ld);   }
+.compare-table th.th-axis { background: #fff; color: var(--navy); width: 1.3in; }
+.compare-table th.th-stakes { background: #fff; color: var(--gold); width: 1.8in; }
+.compare-table td {
+  padding: 8px 12px;
+  vertical-align: top;
+  border-bottom: 1px solid var(--rule);
+  line-height: 1.5;
+}
+.compare-table tr:last-child td { border-bottom: none; }
+.compare-table tr:nth-child(even) td { background: #FAFBFC; }
+.td-axis  { font-weight: 700; color: var(--navy); font-size: 9pt; }
+.td-orig  { color: var(--orig); background: var(--orig-bg) !important; }
+.td-ld    { color: var(--ld);   background: var(--ld-bg)   !important; }
+.td-stakes{ color: var(--gold); font-style: italic; font-size: 9pt; }
+.compare-table tr:nth-child(even) .td-orig { background: #E4EDF7 !important; }
+.compare-table tr:nth-child(even) .td-ld   { background: #F5E7E3 !important; }
+
+.axis-section { margin: 0.2in 0; }
+.axis-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.1in;
+  margin-bottom: 0.1in;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--rule);
+}
+.axis-n {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 8.5pt;
+  font-weight: 700;
+  color: var(--mid);
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+  width: 0.55in;
+}
+.axis-title-text {
+  font-size: 12pt;
+  font-weight: 700;
+  color: var(--navy);
+  font-family: Georgia, serif;
+}
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+.col-orig {
+  background: var(--orig-bg);
+  padding: 0.1in 0.14in;
+  border-right: 1px solid #C3D5E8;
+  font-size: 9.5pt;
+  line-height: 1.55;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+.col-ld {
+  background: var(--ld-bg);
+  padding: 0.1in 0.14in;
+  font-size: 9.5pt;
+  line-height: 1.55;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+.col-label {
+  font-size: 8pt;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+.col-label.orig { color: var(--orig); }
+.col-label.ld   { color: var(--ld);   }
+.stakes-row {
+  background: var(--navy);
+  padding: 12px 16px;
+  font-size: 10pt;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  color: #D5E4F0;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.65;
+  border-top: none;
+}
+.stakes-row strong {
+  color: var(--gold-lt);
+  font-style: normal;
+  font-size: 8pt;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.merit {
+  list-style: none;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 10pt;
+}
+.merit li {
+  padding: 9px 0 9px 1.3em;
+  position: relative;
+  border-bottom: 1px solid var(--rule);
+  line-height: 1.5;
+  color: var(--text);
+}
+.merit li:last-child { border-bottom: none; }
+.merit li::before {
+  content: '\2713';
+  position: absolute; left: 0; top: 9px;
+  color: #2D6A4F; font-weight: 700;
+}
+
+.proposal {
+  margin: 0.22in 0;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.proposal-head {
+  background: var(--navy);
+  padding: 0.14in 0.18in;
+  display: flex;
+  align-items: baseline;
+  gap: 0.14in;
+}
+.p-letter {
+  font-size: 24pt;
+  font-weight: 800;
+  color: var(--gold-lt);
+  line-height: 1;
+  flex-shrink: 0;
+  font-family: Georgia, serif;
+}
+.p-name { font-size: 12.5pt; font-weight: 700; color: #fff; font-family: Georgia, serif; }
+.p-tag  { font-size: 9pt; color: rgba(255,255,255,.65); font-style: italic; margin-top: 2px; font-family: 'Segoe UI', Arial, sans-serif; }
+.proposal-body {
+  padding: 0.15in 0.18in;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 10pt;
+  line-height: 1.6;
+}
+.proposal-body p { margin-bottom: 9px; }
+.proposal-body p:last-child { margin-bottom: 0; }
+.p-section {
+  font-size: 8.5pt;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin: 0.12in 0 5px;
+}
+.p-section:first-child { margin-top: 0; }
+.p-thesis {
+  background: #F0F4F8;
+  border-left: 3px solid var(--mid);
+  padding: 8px 12px;
+  font-style: italic;
+  color: var(--navy);
+  font-size: 10.5pt;
+  margin: 8px 0;
+}
+.p-bullets {
+  list-style: none;
+  margin: 4px 0;
+}
+.p-bullets li {
+  padding: 4px 0 4px 1.1em;
+  position: relative;
+  color: var(--muted);
+  font-size: 9.5pt;
+  line-height: 1.4;
+}
+.p-bullets li::before {
+  content: '\2013';
+  position: absolute; left: 0; top: 4px;
+  color: var(--mid);
+}
+
+.question {
+  margin: 0.16in 0;
+  display: grid;
+  grid-template-columns: 0.38in 1fr;
+  gap: 0.1in;
+  align-items: start;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  padding-bottom: 0.14in;
+  border-bottom: 1px solid var(--rule);
+}
+.question:last-child { border-bottom: none; }
+.q-n {
+  font-size: 18pt;
+  font-weight: 800;
+  color: #D0DCE8;
+  line-height: 1;
+  text-align: center;
+  padding-top: 1px;
+  font-family: Georgia, serif;
+}
+.q-q { font-size: 10.5pt; font-weight: 700; color: var(--navy); margin-bottom: 5px; line-height: 1.4; }
+.q-a { font-size: 9.5pt; color: var(--muted); line-height: 1.55; }
+
+.prop-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.14in;
+  margin: 0.14in 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+.prop-mini {
+  border: 1px solid var(--navy);
+  border-radius: 5px;
+  overflow: hidden;
+}
+.prop-mini-head {
+  background: var(--navy);
+  color: #fff;
+  font-weight: 700;
+  font-size: 9.5pt;
+  padding: 7px 10px 6px;
+}
+.prop-mini-body {
+  padding: 9px 10px;
+  font-size: 9pt;
+  line-height: 1.5;
+  color: var(--text);
+}
+.prop-mini-body em { color: var(--muted); }
+
+.pfoot {
+  margin-top: 0.25in;
+  padding-top: 0.1in;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 8pt;
+  color: var(--muted);
+}
+
+.note {
+  background: #F3F5F7;
+  border-left: 3px solid var(--mid);
+  padding: 0.12in 0.15in;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 9.5pt;
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0.15in 0;
+}
+.note strong { color: var(--text); }
+
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 — COVER -->
+<div class="page">
+
+  <div class="cover-flag">Cuddle Pirates &mdash; Development Document &mdash; Confidential</div>
+
+  <div class="cover-kicker">Creative Analysis &amp; Merger Proposals</div>
+  <h1>Original Bible<br>vs. &ldquo;Laundry Day&rdquo;</h1>
+  <div class="cover-rule"></div>
+
+  <p class="cover-lede">A structured comparison of the two versions of Cuddle Pirates &mdash; what each does well, where they conflict at the premise level, what the Laundry Day proposal contributes unconditionally, and three concrete paths to merge the best of both.</p>
+
+  <div class="position">
+    The Laundry Day proposal brings genuine creative energy, and this analysis keeps everything it gets right. Where this document has a lean, it&rsquo;s toward the Pirates as fully realized beings with their own history and inner lives &mdash; characters who can surprise the children as much as the audience. That preference shapes the three merger proposals, but it&rsquo;s meant to open the conversation, not end it.
+  </div>
+
+  <p style="font-family:'Segoe UI',Arial,sans-serif; font-size:10pt; color:var(--muted); margin-top:0.25in; margin-bottom:0.1in;">This document is organized in four parts:</p>
+  <ol style="font-family:'Segoe UI',Arial,sans-serif; font-size:10pt; color:var(--text); margin-left:1.2em; line-height:2;">
+    <li><strong>At a Glance</strong> &mdash; The summary comparison table</li>
+    <li><strong>Part I</strong> &mdash; Ten axes of divergence, examined in full</li>
+    <li><strong>Part II</strong> &mdash; What &ldquo;Laundry Day&rdquo; gets right, unconditionally</li>
+    <li><strong>Part III</strong> &mdash; Three merger proposals</li>
+    <li><strong>Part IV</strong> &mdash; Five questions for the room</li>
+  </ol>
+
+  <div class="cover-meta" style="margin-top:0.35in;">
+    <span><strong>Project:</strong> Cuddle Pirates &mdash; Animated Short Series</span>
+    <span><strong>Format:</strong> 2&ndash;4 min / Q3 2026 pitch</span>
+    <span><strong>Date:</strong> May 1, 2026</span>
+    <span><strong>Status:</strong> Draft for discussion</span>
+  </div>
+
+</div>
+
+
+<!-- PAGE 2 — AT A GLANCE -->
+<div class="page">
+
+  <h2 style="margin-top:0;">At a Glance</h2>
+  <p style="font-family:'Segoe UI',Arial,sans-serif; font-size:10pt; color:var(--muted); margin-bottom:0.18in;">Ten dimensions where the two versions diverge. The full analysis follows on pages 3&ndash;4. For readers who want only the quick read, this table is the whole argument.</p>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th class="th-axis">Dimension</th>
+        <th class="th-orig">Original Bible</th>
+        <th class="th-ld">Laundry Day Proposal</th>
+        <th class="th-stakes">What&rsquo;s at Stake</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="td-axis">Pirates&rsquo; status</td>
+        <td class="td-orig">Real, autonomous beings with 300 years of independent history</td>
+        <td class="td-ld">Stuffed animals animated by children&rsquo;s imagination</td>
+        <td class="td-stakes">Character depth; capacity for surprise</td>
+      </tr>
+      <tr>
+        <td class="td-axis">Children&rsquo;s role</td>
+        <td class="td-orig">Audience &mdash; admitted to something real happening in their room</td>
+        <td class="td-ld">Protagonists &mdash; they sail with the crew and drive the adventure</td>
+        <td class="td-stakes">The emotional register of the entire show</td>
+      </tr>
+      <tr>
+        <td class="td-axis">Parent&rsquo;s role</td>
+        <td class="td-orig">Unseen obstacle &mdash; the source of physical comedy and the ticking clock</td>
+        <td class="td-ld">Warm co-creator &mdash; Dad invents the myth; Mom is the Giant Squid</td>
+        <td class="td-stakes">Comedy engine vs. family warmth</td>
+      </tr>
+      <tr>
+        <td class="td-axis">Setting</td>
+        <td class="td-orig">One bedroom, nighttime &mdash; deliberately constrained</td>
+        <td class="td-ld">The whole house, daytime &mdash; room by room adventure</td>
+        <td class="td-stakes">Production scope; visual identity</td>
+      </tr>
+      <tr>
+        <td class="td-axis">Entry mechanism</td>
+        <td class="td-orig">The hypnagogic state &mdash; a real neurological window between waking and sleep</td>
+        <td class="td-ld">Childhood imagination &mdash; children believe, therefore it is</td>
+        <td class="td-stakes">The show&rsquo;s authority; grounding in reality</td>
+      </tr>
+      <tr>
+        <td class="td-axis">Pirates&rsquo; agenda</td>
+        <td class="td-orig">Independent heist &mdash; they need pillows for Puff-tooga; Junie is incidental</td>
+        <td class="td-ld">Serve the children &mdash; they exist to help find the missing sock</td>
+        <td class="td-stakes">Moral complexity; long-form story material</td>
+      </tr>
+      <tr>
+        <td class="td-axis">Capacity for surprise</td>
+        <td class="td-orig">High &mdash; Pirates know things the children don&rsquo;t; they can be wrong</td>
+        <td class="td-ld">None &mdash; Pirates can only reflect what the children already believe</td>
+        <td class="td-stakes">Comedy range; drama range; rewatchability</td>
+      </tr>
+      <tr>
+        <td class="td-axis">The illusion break</td>
+        <td class="td-orig">Not present &mdash; adults simply cannot see; what happened was real</td>
+        <td class="td-ld">Explicit, scripted: &ldquo;All the pirates are stuffed animals.&rdquo;</td>
+        <td class="td-stakes">The show&rsquo;s contract with its audience</td>
+      </tr>
+      <tr>
+        <td class="td-axis">Moral complexity</td>
+        <td class="td-orig">Pirates are using the children &mdash; they want the pillows; help is a side effect</td>
+        <td class="td-ld">Pirates are purely benevolent &mdash; they exist only to help</td>
+        <td class="td-stakes">Depth for adult viewers; parental re-engagement</td>
+      </tr>
+      <tr>
+        <td class="td-axis">Visual language</td>
+        <td class="td-orig">Nighttime, atmospheric, cool blue vs. warm hall-light threat</td>
+        <td class="td-ld">Daytime, flat, domestic &mdash; ceiling lines visible in the &ldquo;ocean&rdquo; sky</td>
+        <td class="td-stakes">Animation approach; tone register</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="note" style="margin-top:0.2in;">
+    <strong>Reading note:</strong> Blue cells are the original bible&rsquo;s positions. Red-tinted cells are the Laundry Day proposal&rsquo;s positions. The &ldquo;What&rsquo;s at Stake&rdquo; column names what each choice determines for the show. None of these dimensions are trivial &mdash; they cascade into each other.
+  </div>
+
+  <div class="pfoot">
+    <span>Cuddle Pirates &mdash; Creative Analysis &amp; Merger Proposals</span>
+    <span>2</span>
+  </div>
+</div>
+
+
+<!-- PAGE 3 — PART I: AXES 1–5 -->
+<div class="page">
+
+  <h2 style="margin-top:0;">Part I &mdash; Ten Axes of Divergence</h2>
+
+  <div class="note" style="margin-bottom:0.2in;">
+    <strong>A note before the analysis:</strong> Reading the spec script alone undersells how thoroughly &ldquo;Laundry Day&rdquo; reimagines the show. The storyboard makes the visual argument explicit: Panel 001 shows Ann Bunny at the prow of a ship where the &ldquo;ocean&rdquo; is a living room floor. Panel 048b shows Junie carrying a stuffed Ann Bunny <em>doll</em> next to a real cat tree. This is not a borderline case. The proposal envisions a completely different show.
+  </div>
+
+  <div class="axis-section no-break">
+    <div class="axis-head">
+      <span class="axis-n">Axis 1</span>
+      <span class="axis-title-text">Ontological Status of the Pirates</span>
+    </div>
+    <div class="two-col">
+      <div class="col-orig">
+        <div class="col-label orig">Original Bible</div>
+        The Pirates are real, autonomous beings of the Hypnagogic Seas. They exist whether or not any child is watching. Ann Bunny has 300 years of independent history. They arrive with their own mission, their own crew dynamics, their own internal arguments. When they visit Juniper&rsquo;s room, they are using her. They want the pillows.
+      </div>
+      <div class="col-ld">
+        <div class="col-label ld">Laundry Day Proposal</div>
+        The Pirates are stuffed animals animated by childhood imagination. They have no existence outside the children&rsquo;s perception. The script is explicit and visual: <em>&ldquo;For a moment the illusion is broken. We see the room for what it is, a child&rsquo;s bedroom&hellip; All the pirates are stuffed animals.&rdquo;</em> This is not an accident &mdash; it is the intended emotional logic.
+      </div>
+    </div>
+    <div class="stakes-row"><strong>What&rsquo;s at Stake</strong> This is the foundational divide from which everything else follows. The Pirates in the original can surprise the audience because they have inner lives the children don&rsquo;t control &mdash; Ann Bunny has a motivation she hasn&rsquo;t told Drake, a history she carries alone, an opinion about the mission that is not Junie&rsquo;s opinion. The Pirates in Laundry Day cannot surprise the audience in any way the children themselves haven&rsquo;t already imagined, because the children <em>are</em> the imagination. Ann Bunny in the original has whatever she had before Junie was born. Ann Bunny in Laundry Day has whatever Junie has projected onto her. A character with independent existence can change the story in ways the children haven&rsquo;t anticipated; a character who is the story&rsquo;s projection can only reflect what the children already believe. That difference is what everything else in this analysis follows from.</div>
+  </div>
+
+  <div class="axis-section no-break">
+    <div class="axis-head">
+      <span class="axis-n">Axis 2</span>
+      <span class="axis-title-text">The Children&rsquo;s Role &mdash; Audience vs. Participant</span>
+    </div>
+    <div class="two-col">
+      <div class="col-orig">
+        <div class="col-label orig">Original Bible</div>
+        Juniper is the <em>audience</em> of something happening for real. She is admitted to a secret. The emotional register: <em>you are small, and the world is bigger than you know, and tonight you got to see some of it.</em> This is child-respecting in an unusual way &mdash; the magic is not inside the child; it is outside, and it chose to visit.
+      </div>
+      <div class="col-ld">
+        <div class="col-label ld">Laundry Day Proposal</div>
+        Raylan and Junie are the <em>protagonists</em>. They sail with the crew, climb the cat tree, crawl through the kelp forest. The emotional register: <em>your imagination can make anything an epic.</em> This is warmer and more immediately energetic. Both are valid shows &mdash; they require different character architectures.
+      </div>
+    </div>
+    <div class="stakes-row"><strong>What&rsquo;s at Stake</strong> The choice of who witnesses and who acts defines the emotional promise the show makes to its audience. In the original, Junie is admitted to something she did not create &mdash; and that moment of being chosen, of being seen by something real, is rare in children&rsquo;s media. In Laundry Day, the magic is entirely self-generated, which is empowering &mdash; but it places the creative burden back onto the watching child rather than offering the rarer gift of discovering something genuinely outside themselves. One show says: <em>your imagination is powerful.</em> The other says: <em>the world is stranger than the adults told you, and tonight you got proof.</em></div>
+  </div>
+
+  <div class="axis-section no-break">
+    <div class="axis-head">
+      <span class="axis-n">Axis 3</span>
+      <span class="axis-title-text">The Parent&rsquo;s Role &mdash; Obstacle vs. Co-Creator</span>
+    </div>
+    <div class="two-col">
+      <div class="col-orig">
+        <div class="col-label orig">Original Bible</div>
+        Parents are fully awake adults who cannot see the Pirates. The adult is the threat &mdash; the source of physical comedy, the ticking clock. Every scene has a timer. The adult&rsquo;s presence <em>is</em> the comedy engine.
+      </div>
+      <div class="col-ld">
+        <div class="col-label ld">Laundry Day Proposal</div>
+        Dad invents the Kraken mythology. Mom is the Giant Squid who interrupts the fort. Parents are active, warm, playful. <em>&ldquo;Maybe it was the KRAKEN that stole your sock!&rdquo;</em> He&rsquo;s playing. He&rsquo;s exactly right. The family is the warmth engine.
+      </div>
+    </div>
+    <div class="stakes-row"><strong>What&rsquo;s at Stake</strong> Parents-as-obstacle and parents-as-warmth are not mutually exclusive &mdash; they are sequential in the original. A loving, playful parent who falls asleep is still a ticking clock. What changes is what the clock means: in the original, it means the liminal window is closing; in Laundry Day, it means Mom wants the laundry folded before lunch. The original can absorb all of Laundry Day&rsquo;s family warmth wholesale &mdash; the key insight is that a genuinely playful Dad who accidentally names the Kraken correctly is <em>funnier</em> in a version where the Kraken is real and he doesn&rsquo;t know it. The joke only works if the mythology is true. His love for the story is unconscious memory, not invention.</div>
+  </div>
+
+  <div class="axis-section no-break">
+    <div class="axis-head">
+      <span class="axis-n">Axis 4</span>
+      <span class="axis-title-text">Setting &mdash; One Room vs. The Whole House</span>
+    </div>
+    <div class="two-col">
+      <div class="col-orig">
+        <div class="col-label orig">Original Bible</div>
+        One child&rsquo;s bedroom. Nighttime. Deliberately constrained &mdash; a small world, enormous consequences. The Fluffy Dutchman docked outside the window is the hero prop. The constraint is a production virtue.
+      </div>
+      <div class="col-ld">
+        <div class="col-label ld">Laundry Day Proposal</div>
+        The whole house. Living room, bedroom, backyard, doghouse. The adventure moves room by room the way a chore does &mdash; each location a new stop on the quest. Richer storytelling but significantly heavier to produce.
+      </div>
+    </div>
+    <div class="stakes-row"><strong>What&rsquo;s at Stake</strong> The bedroom-only constraint is not a limitation &mdash; it is the show&rsquo;s signature argument. Great children&rsquo;s storytelling has always understood that the smaller the space, the larger the stakes. The bedroom is not a location; it is the last safe place before sleep. When it is invaded by something real, the invasion means something. When the whole house is the adventure from the start, the house becomes a theme park &mdash; enjoyable, expansive, and immediately familiar. The bedroom is strange because it belongs to the child alone. The show can absolutely grow its territory as the series deepens. The question is whether to start in the smallest possible space, where the strangeness is most concentrated, or to begin already at scale. Starting small, in the dark, is the braver choice.</div>
+  </div>
+
+  <div class="axis-section no-break">
+    <div class="axis-head">
+      <span class="axis-n">Axis 5</span>
+      <span class="axis-title-text">The Entry Mechanism &mdash; Hypnagogic State vs. Open Door</span>
+    </div>
+    <div class="two-col">
+      <div class="col-orig">
+        <div class="col-label orig">Original Bible</div>
+        The hypnagogic state &mdash; a real, documented neurological window between wakefulness and sleep. Children who&rsquo;ve experienced it will recognize what the show describes. Adults who research it will find something true.
+      </div>
+      <div class="col-ld">
+        <div class="col-label ld">Laundry Day Proposal</div>
+        Children believe, therefore it is. Dad says &ldquo;Ann Bunny would know.&rdquo; They run to the room, open the door, adventure begins. No neurological hook, no real-world grounding. The magic is purely imaginative.
+      </div>
+    </div>
+    <div class="stakes-row"><strong>What&rsquo;s at Stake</strong> The hypnagogic state is not a poetic invention &mdash; it is a documented neurological phenomenon, the transitional state between wakefulness and sleep in which the brain generates vivid, often startling imagery that the experiencing person knows, in the moment, is real. Children experience it more intensely than adults. Adults who experienced it as children remember it as the most real thing they ever felt &mdash; and then decided they had imagined it. A show that names this state and says &ldquo;that&rsquo;s where the Pirates come from&rdquo; does not ask audiences to believe in magic. It asks audiences to remember something true that they were taught to disbelieve. That is a completely different transaction than &ldquo;children believe, therefore it is.&rdquo; One premise gives children permission to imagine. The other gives them evidence they were right all along.</div>
+  </div>
+
+  <div class="pfoot">
+    <span>Cuddle Pirates &mdash; Creative Analysis &amp; Merger Proposals</span>
+    <span>3</span>
+  </div>
+</div>
+
+
+<!-- PAGE 4 — PART I: AXES 6–10 + PART II -->
+<div class="page">
+
+  <div class="axis-section no-break">
+    <div class="axis-head">
+      <span class="axis-n">Axis 6</span>
+      <span class="axis-title-text">The Pirates&rsquo; Own Agenda</span>
+    </div>
+    <div class="two-col">
+      <div class="col-orig">
+        <div class="col-label orig">Original Bible</div>
+        The Pirates come for the pillows. They have a broken fort to repair at Puff-tooga. The crew is a heist crew that happens to also care about Juniper &mdash; because Ann Bunny cannot help caring, not because caring is the mission. This moral complexity is the show&rsquo;s hidden engine.
+      </div>
+      <div class="col-ld">
+        <div class="col-label ld">Laundry Day Proposal</div>
+        The Pirates have no independent agenda. Ann Bunny&rsquo;s first line is a question: <em>&ldquo;What is this about a treasure hunt?&rdquo;</em> She has no knowledge the children don&rsquo;t have. She is a vehicle for the quest the children are already on.
+      </div>
+    </div>
+    <div class="stakes-row"><strong>What&rsquo;s at Stake</strong> The Pirates&rsquo; independent agenda is what makes Ann Bunny morally interesting rather than merely lovable. She doesn&rsquo;t help Junie because helping Junie is her purpose &mdash; she helps because she can&rsquo;t not, and because her crew is watching, and because she is 300 years old and has learned that the only way to live with yourself across centuries is to do the right thing when it costs you something. This is the subtext parents notice on a third watch. A crew that shows up only to help has no shadows. A crew that shows up to steal and stays to care has a soul. The difference is not a stylistic preference &mdash; it is the difference between a show that is charming and a show that is remembered.</div>
+  </div>
+
+  <div class="axis-section no-break">
+    <div class="axis-head">
+      <span class="axis-n">Axis 7</span>
+      <span class="axis-title-text">The Capacity for Surprise</span>
+    </div>
+    <div class="two-col">
+      <div class="col-orig">
+        <div class="col-label orig">Original Bible</div>
+        The Pirates can know things the children don&rsquo;t. Ann Bunny has been in this house before. Drake can chase the wrong horizon and have to be called back. The Pirates can be wrong. They can arrive with conflicting information.
+      </div>
+      <div class="col-ld">
+        <div class="col-label ld">Laundry Day Proposal</div>
+        The Pirates cannot know anything the children haven&rsquo;t established. Vasco&rsquo;s &ldquo;Is the Kraken real?&rdquo; is funny &mdash; but reveals he genuinely cannot know independently. All Pirate knowledge is projected by the children.
+      </div>
+    </div>
+    <div class="stakes-row"><strong>What&rsquo;s at Stake</strong> The specific value of the Pirates&rsquo; capacity for surprise is this: it allows the show to be wrong in the same ways real relationships are wrong. Ann Bunny can misjudge Junie. Drake can be confident about exactly the wrong thing. Jean LaFluff can refuse to apologize and then apologize in a way that is not quite an apology. These are the moments children recognize from actual life &mdash; the moment when someone you love is inexplicably wrong, or unexpectedly right, in a way you never predicted. That recognition is the emotional core of any long-running character relationship. Without independent inner lives, the Pirates are mirrors. With them, they are people. And children, who spend most of their days surrounded by adults who think they can predict children&rsquo;s responses, find it deeply satisfying when a character confounds expectation.</div>
+  </div>
+
+  <div class="axis-section no-break">
+    <div class="axis-head">
+      <span class="axis-n">Axis 8</span>
+      <span class="axis-title-text">The Illusion Break</span>
+    </div>
+    <div class="two-col">
+      <div class="col-orig">
+        <div class="col-label orig">Original Bible</div>
+        No illusion break. If a parent walks in and sees stuffed animals, it&rsquo;s because the Pirates are very good at being still &mdash; or because the adult&rsquo;s presence closed the hypnagogic window. What happened was real. The parent simply cannot see it.
+      </div>
+      <div class="col-ld">
+        <div class="col-label ld">Laundry Day Proposal</div>
+        A deliberate, scripted beat: the illusion breaks. <em>&ldquo;We see the room for what it is&hellip; All the pirates are stuffed animals.&rdquo;</em> Well-executed. Also the moment the show admits the Pirates are imagination, not reality.
+      </div>
+    </div>
+    <div class="stakes-row"><strong>What&rsquo;s at Stake</strong> The show&rsquo;s audience will include children who are currently experiencing the hypnagogic state and don&rsquo;t have a name for it. They will recognize the Pirates &mdash; not as familiar, but as true. Laundry Day offers those children a beautiful imaginative game. The original offers them something rarer: confirmation that what they already experience, and have been told is just a dream, is real. The two contracts are fundamentally different: <em>your imagination is powerful</em> versus <em>what you saw was real and the adults just can&rsquo;t see it.</em> The latter is more frightening, more unusual, and more honest about what the hypnagogic state actually feels like to a child who is living through it. One is permission. The other is vindication.</div>
+  </div>
+
+  <div class="axis-section no-break">
+    <div class="axis-head">
+      <span class="axis-n">Axis 9</span>
+      <span class="axis-title-text">Moral Complexity</span>
+    </div>
+    <div class="two-col">
+      <div class="col-orig">
+        <div class="col-label orig">Original Bible</div>
+        The Pirates are not purely benevolent. They&rsquo;re there for the pillows. Ann Bunny helps because she is constitutionally incapable of not caring &mdash; not because caring is the mission. Quietly honest about how care works in the world.
+      </div>
+      <div class="col-ld">
+        <div class="col-label ld">Laundry Day Proposal</div>
+        The Pirates are purely benevolent. They exist to help. The theme &mdash; <em>&ldquo;everything is more fun when you do it together&rdquo;</em> &mdash; is warm and true and slightly thin for a show with this much potential.
+      </div>
+    </div>
+    <div class="stakes-row"><strong>What&rsquo;s at Stake</strong> A children&rsquo;s show that is only for children ends after a season or two. The shows that become generational &mdash; that parents quote to their own children decades later &mdash; are the ones with something going on underneath. Ann Bunny&rsquo;s self-serving kindness, her inability to not care even when caring is inconvenient, is a portrait of how love actually works in people who are not saints. Children are more sophisticated readers of human motivation than adults give them credit for. A character who helps because she can&rsquo;t help it is more interesting to a five-year-old than a character who helps because helping is her purpose. Goodness that costs something is more real than goodness that is free. Parents watching alongside their children will feel this in the first episode and come back for the second.</div>
+  </div>
+
+  <div class="axis-section no-break">
+    <div class="axis-head">
+      <span class="axis-n">Axis 10</span>
+      <span class="axis-title-text">Visual Language</span>
+    </div>
+    <div class="two-col">
+      <div class="col-orig">
+        <div class="col-label orig">Original Bible</div>
+        Nighttime, atmospheric, cool blue window light vs. warm hall-light threat. Physical comedy in constrained space. The Fluffy Dutchman as hero prop. Cloth sim on pillowcase. Ragdoll acrobatics.
+      </div>
+      <div class="col-ld">
+        <div class="col-label ld">Laundry Day Proposal</div>
+        Flat, bright, domestic. The &ldquo;ocean&rdquo; is always the floor, tile grid lines visible. The dual-layer visual device (Panel 001) is elegant and clear. The storyboard is real craft &mdash; 48 panels of board-quality work.
+      </div>
+    </div>
+    <div class="stakes-row"><strong>What&rsquo;s at Stake</strong> Laundry Day&rsquo;s visual device &mdash; overlaying the adventure onto domestic space &mdash; is a solved problem executed cleanly. But it announces its own logic immediately, which means there is nowhere for the visual vocabulary to grow. The original&rsquo;s nighttime palette has room to deepen: the first episode is cool blue and familiar; by season three the Hypnagogic Seas might look like nothing the audience has seen in animation before. The visual world can evolve in concert with what the Pirates know and what Junie is ready to see. That evolution requires starting in the bedroom, at night, in the specific strangeness that exists in the minutes just before sleep &mdash; the strangeness Laundry Day gestures toward but cannot fully occupy because it is set, fundamentally, in the daytime. Laundry Day&rsquo;s dual-world device is transferable and belongs in the show. The question is which premise it serves.</div>
+  </div>
+
+  <hr>
+
+  <h2>Part II &mdash; What &ldquo;Laundry Day&rdquo; Gets Right, Unconditionally</h2>
+
+  <p style="font-family:'Segoe UI',Arial,sans-serif; font-size:10pt; color:var(--muted); margin-bottom:0.14in;">These contributions do not require accepting the imagination-construct framing. They belong to the show in any version and are adopted regardless of which merger path is chosen.</p>
+
+  <ul class="merit">
+    <li><strong>The Rose family is alive.</strong> Raylan in the starfish suit, Junie on Verne, Mom with the laundry basket. The family&rsquo;s physicality and specific dynamics are a genuine creative discovery. Keep all of it.</li>
+    <li><strong>Dad&rsquo;s accidental accuracy.</strong> <em>&ldquo;Maybe it was the KRAKEN!&rdquo;</em> He&rsquo;s playing. He&rsquo;s exactly right. This is the best single joke in the script. It is <em>funnier</em> in a version where Dad doesn&rsquo;t know the Pirates are real &mdash; he accidentally named a real entity.</li>
+    <li><strong>The domestic-task-as-adventure template.</strong> Chore&nbsp;= quest. Every room = a new ocean location. This episodic engine runs indefinitely, regardless of premise.</li>
+    <li><strong>The Kraken reveal.</strong> Ava / collar jingle / doghouse full of socks. Satisfying, earned, emotionally true to the dog&rsquo;s character.</li>
+    <li><strong>Verne&rsquo;s consent beat.</strong> Junie and Verne sidebar privately before he agrees to plug the wall. One of the most emotionally precise moments in the project. Keep it exactly as written.</li>
+    <li><strong>The laundry shanty.</strong> The mundane made epic through shared rhythm. The show&rsquo;s musical identity in miniature.</li>
+    <li><strong>Mom as Giant Squid / Dad as Great White Whale.</strong> A single image that explains the show&rsquo;s emotional architecture in two seconds of screen time.</li>
+    <li><strong>48 panels of board-quality storyboard work.</strong> The staging decisions are real. This storyboard has material to mine at every beat regardless of the ontological outcome.</li>
+  </ul>
+
+  <div class="pfoot">
+    <span>Cuddle Pirates &mdash; Creative Analysis &amp; Merger Proposals</span>
+    <span>4</span>
+  </div>
+</div>
+
+
+<!-- PAGE 5 — PART III: MERGER PROPOSALS -->
+<div class="page">
+
+  <h2 style="margin-top:0;">Part III &mdash; Three Merger Proposals</h2>
+  <p style="font-family:'Segoe UI',Arial,sans-serif; font-size:10pt; color:var(--muted); margin-bottom:0.2in;">Each proposal absorbs the Laundry Day material while preserving the Pirates as fully realized autonomous beings. They are not mutually exclusive.</p>
+
+  <div class="proposal no-break">
+    <div class="proposal-head">
+      <div class="p-letter">A</div>
+      <div>
+        <div class="p-name">&ldquo;The Daytime Play Sets the Stage&rdquo;</div>
+        <div class="p-tag">Your imagination is good. The real thing is better.</div>
+      </div>
+    </div>
+    <div class="proposal-body">
+      <div class="p-section">The Model</div>
+      <p>Each episode opens in <strong>daytime play mode</strong> &mdash; Raylan and Junie&rsquo;s imagination, exactly as rendered in Laundry Day. Bright, flat, domestic. Junie&rsquo;s stuffed Ann Bunny rabbit is her pirate captain. This is real. This is the children playing. The stuffed Ann Bunny is brave, decisive, always knows what to do. She is everything Junie needs her to be, with no friction and no agenda of her own.</p>
+      <p>Then bedtime comes. The daytime adventure ends. Junie can&rsquo;t sleep. And then &mdash; from outside the window, in the dark &mdash; something arrives that is <em>nothing like</em> what Junie imagined. The real Ann Bunny knows things Junie never told her. She has an opinion about the plan that nobody asked for. She corrects Junie&rsquo;s pronunciation of &ldquo;Puff-tooga&rdquo; with a precision that suggests she has feelings about it. She is also, somehow, exactly right about the thing that matters.</p>
+      <div class="p-thesis">The show&rsquo;s central joke: the stuffed rabbit says exactly what Junie needs to hear. The real Ann Bunny says what Junie needs to know. These are, in the best episodes, completely different things.</div>
+      <div class="p-section">The Slow Drift</div>
+      <p>Over the course of a season, Junie&rsquo;s daytime play starts to change. The stuffed Ann Bunny gets less perfect. She starts to be wrong about things in ways that are oddly specific. She starts to have opinions that weren&rsquo;t there before &mdash; she once corrects Raylan&rsquo;s knot in the exact same way the real Ann Bunny corrected it two nights ago. Junie doesn&rsquo;t notice this. The audience does. The stuffed Ann Bunny is being colonized by the real one &mdash; not through magic, but through the way children who love something slowly replace what they imagined with what they actually know.</p>
+      <p>There is also the matter of the real Ann Bunny&rsquo;s tail. It does something in cold water that Junie couldn&rsquo;t have known. By episode six, the stuffed rabbit&rsquo;s tail does it too. Drake has a policy about not remarking on things like this. He has mentioned it once. Ann Bunny told him it was a coincidence. Her tail didn&rsquo;t move for the rest of that night.</p>
+      <div class="p-section">What It Preserves &amp; Requires</div>
+      <ul class="p-bullets">
+        <li>Full autonomy of the Pirates &mdash; Ann Bunny&rsquo;s 300 years, the tail, the private history &mdash; unmodified</li>
+        <li>All Rose family material and Laundry Day visual language absorbed into the daytime format exactly as written</li>
+        <li>Two distinct visual styles per episode &mdash; flat/bright daytime vs. cool/atmospheric nighttime &mdash; a production challenge and the show&rsquo;s defining visual signature</li>
+        <li>The emotional arc of the series is built in: the daytime imagination and the nighttime reality slowly converge. By the series finale, there is no gap between what Junie imagined and what is real. She has been paying attention the whole time.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="proposal no-break">
+    <div class="proposal-head">
+      <div class="p-letter">B</div>
+      <div>
+        <div class="p-name">&ldquo;The House Is Already an Ocean&rdquo;</div>
+        <div class="p-tag">Keep everything. Expand the territory.</div>
+      </div>
+    </div>
+    <div class="proposal-body">
+      <div class="p-section">The Model</div>
+      <p>The original premise remains completely intact. What changes: the territory expands. The Fluffy Dutchman enters through the bedroom window, as always &mdash; but some nights the hypnagogic state reaches further, because Junie is more deeply between worlds than usual. The Pirates find they can move through the hall without the ocean closing. The kitchen tiles are a shallow reef, well-charted. The living room carpet is open ocean, treacherous. The laundry room is a place the crew mentions in low voices and doesn&rsquo;t explain.</p>
+      <div class="p-thesis">The entire multi-room quest structure from Laundry Day is absorbed wholesale into the original premise. No premise change required &mdash; just an expansion of the existing rules about where the hypnagogic state reaches on a given night.</div>
+      <div class="p-section">The Crew&rsquo;s Professional Vocabulary</div>
+      <p>Each room has a name in the crew&rsquo;s vocabulary, developed across 300 years of bedroom operations in thousands of houses. What Junie&rsquo;s family calls &ldquo;the hall&rdquo; the crew calls the Narrows. The bathroom is the Freshwater Reaches &mdash; neutral territory, never contested. The parents&rsquo; bedroom is the Forbidden Latitude. No crew member goes there. Drake once went there. Drake doesn&rsquo;t talk about it. The kitchen is the Galley of Giants, named for obvious reasons. The backyard is uncharted water: no crew has mapped it from inside the hypnagogic state because the state almost never reaches this far. Vasco has a theory about why. The theory involves the dog.</p>
+      <div class="p-section">The Moving Edge</div>
+      <p>The hypnagogic reach fluctuates with the depth of Junie&rsquo;s sleep. A room that was ocean an hour ago might revert to just a room if she stirs. The Pirates have protocols: Drake keeps one eye on the bedroom door at all times; when the light under it changes, the crew has thirty seconds to clear. This is standard. This is not exciting. What is exciting is the night the reach extends to the backyard for the first time and the crew discovers that Ava&rsquo;s territory, in the Hypnagogic Sea, is much larger than anyone expected &mdash; and that Ava has been waiting for someone to finally notice.</p>
+      <div class="p-section">What It Preserves &amp; Requires</div>
+      <ul class="p-bullets">
+        <li>No changes to the original premise, characters, or 300-year history</li>
+        <li>Laundry Day&rsquo;s room-by-room adventure structure absorbed without alteration</li>
+        <li>Simplest path to integration &mdash; the only new rule is a spatial one about hypnagogic reach</li>
+        <li>The crew&rsquo;s professional names for household rooms become a running vocabulary that deepens across the series</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="proposal no-break">
+    <div class="proposal-head">
+      <div class="p-letter">C</div>
+      <div>
+        <div class="p-name">&ldquo;The Parallel Tracks&rdquo;</div>
+        <div class="p-tag">The coincidences are accumulating. Junie is starting to notice.</div>
+      </div>
+    </div>
+    <div class="proposal-body">
+      <div class="p-section">The Model</div>
+      <p>Two kinds of episodes coexist in the same series. <strong>Night episodes</strong> follow the original 7-beat structure &mdash; hypnagogic state, real Pirates, stealth comedy, heist, escape through the window before dawn. <strong>Daytime episodes</strong> follow the Laundry Day template &mdash; children play pirates during chores, whole-house adventure, imagination as the engine. Both are complete episodes. Neither explains the other.</p>
+      <div class="p-thesis">The connection is structural, not explicit: the daytime play keeps accidentally solving real problems the Pirates established the night before. Raylan&rsquo;s starfish sweep locates the sock Vasco needed. Junie&rsquo;s imaginary &ldquo;plugging the wall&rdquo; game leads Verne to a corner of the house the real Pirates had surveyed but couldn&rsquo;t access. The children are solving real problems without knowing the problems are real.</div>
+      <div class="p-section">The Coincidence Architecture</div>
+      <p>The coincidences work because daytime play and nighttime missions cover the same domestic territory &mdash; children playing pirates in the house will encounter the same moved furniture, unusual sock deposits, and recently-negotiated cats that the real Pirates left behind. What the audience understands from a night episode, the children interpret through an imaginative frame the next morning. The same event, read from two directions.</p>
+      <p>Re-watching the daytime episodes after the nighttime episodes reveals a second layer that was always there: Junie&rsquo;s &ldquo;imaginative&rdquo; decision to search the dryer first wasn&rsquo;t random &mdash; she had been dreaming, in the precise half-aware way the hypnagogic state allows, of the crew&rsquo;s actual route the night before. The daytime play isn&rsquo;t imagination. It is memory she doesn&rsquo;t know she has yet.</p>
+      <div class="p-section">Ann Bunny&rsquo;s Problem</div>
+      <p>Ann Bunny&rsquo;s problem across this entire structure is the same problem she&rsquo;s had for 300 years. She is very good at not caring about any particular child. She has been to thousands of bedrooms. She has a policy. She has never once been able to leave without confirming the child is all right. The coincidences are not accidents &mdash; she is leaving breadcrumbs. She is not supposed to be doing this. Drake has noticed. He hasn&rsquo;t said anything yet. When he finally does, the conversation will be the emotional center of the second season.</p>
+      <div class="p-section">What It Requires</div>
+      <ul class="p-bullets">
+        <li>Both formats coexist &mdash; no compromise on Pirates&rsquo; autonomy; full absorption of Laundry Day material into the daytime format</li>
+        <li>A continuity document tracking which daytime actions correspond to which nighttime missions &mdash; this is the series&rsquo; hidden architecture</li>
+        <li>A long-form plan for when Junie starts to notice: first a curiosity, then a suspicion, then a confrontation that neither she nor Ann Bunny is fully prepared for</li>
+        <li>The richest format of the three &mdash; and the most demanding to maintain. Worth every bit of it.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="pfoot">
+    <span>Cuddle Pirates &mdash; Creative Analysis &amp; Merger Proposals</span>
+    <span>5</span>
+  </div>
+</div>
+
+
+<!-- PAGE 6 — PART IV: QUESTIONS + CLOSING -->
+<div class="page">
+
+  <h2 style="margin-top:0;">Part IV &mdash; Five Questions for the Room</h2>
+
+  <p style="font-family:'Segoe UI',Arial,sans-serif; font-size:10pt; color:var(--muted); margin-bottom:0.2in;">These decisions can&rsquo;t be resolved by analysis alone. Where the room lands on each one determines which merger path is right &mdash; or which combination of the three.</p>
+
+  <div class="question no-break">
+    <div class="q-n">1</div>
+    <div>
+      <div class="q-q">In the nighttime episodes, does Junie <em>watch</em> the Pirates &mdash; or does she <em>go with them?</em></div>
+      <div class="q-a">In the original structure, Juniper is the audience &mdash; admitted to a secret. In Laundry Day, the children sail with the crew. These are different emotional registers: <em>&ldquo;admitted to something real&rdquo;</em> vs. <em>&ldquo;brought along on a mission.&rdquo;</em> The choice cascades through every scene structure in the nighttime format.</div>
+    </div>
+  </div>
+
+  <div class="question no-break">
+    <div class="q-n">2</div>
+    <div>
+      <div class="q-q">Do we run the &ldquo;Pirates go stone-still&rdquo; version of the illusion break?</div>
+      <div class="q-a">Laundry Day&rsquo;s illusion break is honest and well-executed. The original premise version: Mom lifts the fort ceiling &mdash; the Pirates go stone-still, staring nowhere, perfectly inert &mdash; and Mom sees stuffed animals. The audience knows what just happened. Mom doesn&rsquo;t. Ann Bunny&rsquo;s tail is not moving. This is both funnier and more unsettling than the explicit break.</div>
+    </div>
+  </div>
+
+  <div class="question no-break">
+    <div class="q-n">3</div>
+    <div>
+      <div class="q-q">Is Dad-as-myth-creator something to preserve &mdash; and does he know he&rsquo;s accidentally correct?</div>
+      <div class="q-a">A possible reframe: Dad didn&rsquo;t invent Ann Bunny. He <em>remembered</em> her. He encountered the Pirates in hypnagogic state as a child and filed the memory away as something he made up. When he says &ldquo;Ann Bunny would know,&rdquo; he doesn&rsquo;t know why he chose that name. Neither does Ann Bunny. She went still for a moment when he said it. Her tail didn&rsquo;t move for a long time after.</div>
+    </div>
+  </div>
+
+  <div class="question no-break">
+    <div class="q-n">4</div>
+    <div>
+      <div class="q-q">In the storyboards, the Pirates are drawn as rabbits. The original bible specifies bear-based designs. Is the rabbit design intentional and preferred?</div>
+      <div class="q-a">A productive version of this tension: Junie&rsquo;s stuffed Ann Bunny <em>is</em> a rabbit (the toy she has). The real Ann Bunny is whatever she actually is. Junie initially mistakes Ann Bunny for her toy. Ann Bunny, who has spent 300 years not being mistaken for a toy, has a reaction.</div>
+    </div>
+  </div>
+
+  <div class="question no-break">
+    <div class="q-n">5</div>
+    <div>
+      <div class="q-q">Does the show end with the Pirates leaving with the pillows &mdash; or with the family together?</div>
+      <div class="q-a">Laundry Day ends with warmth: adventure complete, family together. The original ends with the Pirates escaping out the window, plunder in hand. A merger holds both: the Pirates leave with the pillows, and the last shot is the family in the morning finding the laundry room neat, the socks folded, no explanation for how.</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <h2>Where This Leaves Us</h2>
+
+  <p>The three proposals in brief:</p>
+
+  <div class="prop-grid" style="margin:0.14in 0 0.22in;">
+    <div class="prop-mini">
+      <div class="prop-mini-head">Proposal A</div>
+      <div class="prop-mini-body">Daytime = Laundry Day imagination format. Nighttime = real Pirates arrive and are different from what was imagined. Two visual modes, one show.<br><br><em>Theme: Your imagination is good. The real thing is better.</em></div>
+    </div>
+    <div class="prop-mini">
+      <div class="prop-mini-head">Proposal B</div>
+      <div class="prop-mini-body">Original premise intact; territory expands. The whole house is the Hypnagogic Sea when children are between worlds. Laundry Day&rsquo;s multi-room template absorbed wholesale. No premise change required.<br><br><em>Simplest path to integration.</em></div>
+    </div>
+    <div class="prop-mini">
+      <div class="prop-mini-head">Proposal C</div>
+      <div class="prop-mini-body">Night episodes (original) and daytime episodes (Laundry Day) coexist. The daytime play accidentally solves real problems the Pirates set up the night before.<br><br><em>Theme: The coincidences are accumulating.</em></div>
+    </div>
+  </div>
+
+  <p>Whether the show goes with A, B, C, or a hybrid, the following Laundry Day contributions are adopted immediately and unconditionally: the Rose family dynamics and visual designs, Dad&rsquo;s accidental accuracy, the domestic-task-as-adventure template, the Kraken reveal, Verne&rsquo;s consent beat, the laundry shanty, and the Mom-as-Giant-Squid imagery. These do not require negotiation.</p>
+
+  <p style="font-style:italic; color:var(--muted); margin-top:0.18in; font-size:10pt;">This document was prepared for internal creative discussion. It is not a final position &mdash; it is a framework for making the final position together.</p>
+
+  <div class="pfoot" style="margin-top:0.3in;">
+    <span>Cuddle Pirates &mdash; Creative Analysis &amp; Merger Proposals &mdash; May 2026</span>
+    <span>6</span>
+  </div>
+</div>
+
+</body>
+</html>
