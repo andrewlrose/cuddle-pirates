@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "project": "CuddlePirates",
   "generated": "2026-04-25",
   "note": "Source-of-truth concept references. Files are NOT duplicated into the project tree; Volta's per-project catalog will import these as REFERENCE-tier assets when <project>/.volta/ migration ships.",
@@ -23,6 +23,32 @@
         "E:/OneDrive/Backup_2023oct22/AI/doctor_sir_fuzzy_drake_the_cuddle_pirate_sailing_through_a_chil_66b98867-3ee2-402e-b313-af77a23f7fb8.png",
         "E:/OneDrive/Backup_2023oct22/AI/doctor_sir_fuzzy_drake_the_cuddle_pirate_sailing_through_a_chil_716049b4-71ac-42c5-a250-0be761691db2.png",
         "E:/OneDrive/Backup_2023oct22/AI/doctor_sir_fuzzy_drake_the_cuddle_pirate_sailing_through_a_chil_f828ee96-ff41-4555-adc1-f3db8329d00b.png"
+      ],
+      "file_refs": [
+        {
+          "sha256": null,
+          "relative_path": "doctor_sir_fuzzy_drake_the_cuddle_pirate_sailing_through_a_chil_4eb6abec-4719-4c4b-be76-bdc05cf8ab24.png",
+          "source_root": "E:/OneDrive/Backup_2023oct22/AI",
+          "abs_path_fallback": "E:/OneDrive/Backup_2023oct22/AI/doctor_sir_fuzzy_drake_the_cuddle_pirate_sailing_through_a_chil_4eb6abec-4719-4c4b-be76-bdc05cf8ab24.png"
+        },
+        {
+          "sha256": null,
+          "relative_path": "doctor_sir_fuzzy_drake_the_cuddle_pirate_sailing_through_a_chil_66b98867-3ee2-402e-b313-af77a23f7fb8.png",
+          "source_root": "E:/OneDrive/Backup_2023oct22/AI",
+          "abs_path_fallback": "E:/OneDrive/Backup_2023oct22/AI/doctor_sir_fuzzy_drake_the_cuddle_pirate_sailing_through_a_chil_66b98867-3ee2-402e-b313-af77a23f7fb8.png"
+        },
+        {
+          "sha256": null,
+          "relative_path": "doctor_sir_fuzzy_drake_the_cuddle_pirate_sailing_through_a_chil_716049b4-71ac-42c5-a250-0be761691db2.png",
+          "source_root": "E:/OneDrive/Backup_2023oct22/AI",
+          "abs_path_fallback": "E:/OneDrive/Backup_2023oct22/AI/doctor_sir_fuzzy_drake_the_cuddle_pirate_sailing_through_a_chil_716049b4-71ac-42c5-a250-0be761691db2.png"
+        },
+        {
+          "sha256": null,
+          "relative_path": "doctor_sir_fuzzy_drake_the_cuddle_pirate_sailing_through_a_chil_f828ee96-ff41-4555-adc1-f3db8329d00b.png",
+          "source_root": "E:/OneDrive/Backup_2023oct22/AI",
+          "abs_path_fallback": "E:/OneDrive/Backup_2023oct22/AI/doctor_sir_fuzzy_drake_the_cuddle_pirate_sailing_through_a_chil_f828ee96-ff41-4555-adc1-f3db8329d00b.png"
+        }
       ]
     },
     {
@@ -46,6 +72,80 @@
         "E:/OneDrive/Backup_2023oct22/AI/doctor_suave_charming_cuddle_pirate_sailing_the_vast_seas_of_ch_afe43b92-1d5d-4016-b82a-c03e082e406c.png",
         "E:/OneDrive/Backup_2023oct22/AI/doctor_suave_charming_cuddle_pirate_sailing_the_vast_seas_of_ch_d0e9691b-d290-49d2-a6f4-40adacf87903.png",
         "E:/OneDrive/Backup_2023oct22/AI/doctor_suave_charming_cuddle_pirate_sailing_the_vast_seas_of_ch_f7448bfa-4ece-4d5b-947d-f7341eeaa2c4.png"
+      ],
+      "file_refs": [
+        {
+          "sha256": null,
+          "relative_path": "doctor_suave_charming_cuddle_pirate_sailing_the_vast_seas_of_ch_28094b65-bbd1-4967-951b-5950617588a5.png",
+          "source_root": "E:/OneDrive/Backup_2023oct22/AI",
+          "abs_path_fallback": "E:/OneDrive/Backup_2023oct22/AI/doctor_suave_charming_cuddle_pirate_sailing_the_vast_seas_of_ch_28094b65-bbd1-4967-951b-5950617588a5.png"
+        },
+        {
+          "sha256": null,
+          "relative_path": "doctor_suave_charming_cuddle_pirate_sailing_the_vast_seas_of_ch_2901d7fd-9a83-4a2a-8dae-5d929cbadf06.png",
+          "source_root": "E:/OneDrive/Backup_2023oct22/AI",
+          "abs_path_fallback": "E:/OneDrive/Backup_2023oct22/AI/doctor_suave_charming_cuddle_pirate_sailing_the_vast_seas_of_ch_2901d7fd-9a83-4a2a-8dae-5d929cbadf06.png"
+        },
+        {
+          "sha256": null,
+          "relative_path": "doctor_suave_charming_cuddle_pirate_sailing_the_vast_seas_of_ch_3acc0841-4234-41bd-95dc-4bc2bda8c316.png",
+          "source_root": "E:/OneDrive/Backup_2023oct22/AI",
+          "abs_path_fallback": "E:/OneDrive/Backup_2023oct22/AI/doctor_suave_charming_cuddle_pirate_sailing_the_vast_seas_of_ch_3acc0841-4234-41bd-95dc-4bc2bda8c316.png"
+        },
+        {
+          "sha256": null,
+          "relative_path": "doctor_suave_charming_cuddle_pirate_sailing_the_vast_seas_of_ch_4d6a4176-663a-4f27-bb3c-c8d3ee6674e4.png",
+          "source_root": "E:/OneDrive/Backup_2023oct22/AI",
+          "abs_path_fallback": "E:/OneDrive/Backup_2023oct22/AI/doctor_suave_charming_cuddle_pirate_sailing_the_vast_seas_of_ch_4d6a4176-663a-4f27-bb3c-c8d3ee6674e4.png"
+        },
+        {
+          "sha256": null,
+          "relative_path": "doctor_suave_charming_cuddle_pirate_sailing_the_vast_seas_of_ch_5d44ca8a-6671-4607-8ab9-3fb84ae8f0de.png",
+          "source_root": "E:/OneDrive/Backup_2023oct22/AI",
+          "abs_path_fallback": "E:/OneDrive/Backup_2023oct22/AI/doctor_suave_charming_cuddle_pirate_sailing_the_vast_seas_of_ch_5d44ca8a-6671-4607-8ab9-3fb84ae8f0de.png"
+        },
+        {
+          "sha256": null,
+          "relative_path": "doctor_suave_charming_cuddle_pirate_sailing_the_vast_seas_of_ch_5d60debe-8b7f-4856-be7e-7de3105273cb.png",
+          "source_root": "E:/OneDrive/Backup_2023oct22/AI",
+          "abs_path_fallback": "E:/OneDrive/Backup_2023oct22/AI/doctor_suave_charming_cuddle_pirate_sailing_the_vast_seas_of_ch_5d60debe-8b7f-4856-be7e-7de3105273cb.png"
+        },
+        {
+          "sha256": null,
+          "relative_path": "doctor_suave_charming_cuddle_pirate_sailing_the_vast_seas_of_ch_630839ab-0707-4a72-b3b6-177930527ce7.png",
+          "source_root": "E:/OneDrive/Backup_2023oct22/AI",
+          "abs_path_fallback": "E:/OneDrive/Backup_2023oct22/AI/doctor_suave_charming_cuddle_pirate_sailing_the_vast_seas_of_ch_630839ab-0707-4a72-b3b6-177930527ce7.png"
+        },
+        {
+          "sha256": null,
+          "relative_path": "doctor_suave_charming_cuddle_pirate_sailing_the_vast_seas_of_ch_71bac3da-ffb0-4bfe-8819-eacf02335e2e.png",
+          "source_root": "E:/OneDrive/Backup_2023oct22/AI",
+          "abs_path_fallback": "E:/OneDrive/Backup_2023oct22/AI/doctor_suave_charming_cuddle_pirate_sailing_the_vast_seas_of_ch_71bac3da-ffb0-4bfe-8819-eacf02335e2e.png"
+        },
+        {
+          "sha256": null,
+          "relative_path": "doctor_suave_charming_cuddle_pirate_sailing_the_vast_seas_of_ch_810d51d8-471c-4749-93cd-89ca9e4d1720.png",
+          "source_root": "E:/OneDrive/Backup_2023oct22/AI",
+          "abs_path_fallback": "E:/OneDrive/Backup_2023oct22/AI/doctor_suave_charming_cuddle_pirate_sailing_the_vast_seas_of_ch_810d51d8-471c-4749-93cd-89ca9e4d1720.png"
+        },
+        {
+          "sha256": null,
+          "relative_path": "doctor_suave_charming_cuddle_pirate_sailing_the_vast_seas_of_ch_afe43b92-1d5d-4016-b82a-c03e082e406c.png",
+          "source_root": "E:/OneDrive/Backup_2023oct22/AI",
+          "abs_path_fallback": "E:/OneDrive/Backup_2023oct22/AI/doctor_suave_charming_cuddle_pirate_sailing_the_vast_seas_of_ch_afe43b92-1d5d-4016-b82a-c03e082e406c.png"
+        },
+        {
+          "sha256": null,
+          "relative_path": "doctor_suave_charming_cuddle_pirate_sailing_the_vast_seas_of_ch_d0e9691b-d290-49d2-a6f4-40adacf87903.png",
+          "source_root": "E:/OneDrive/Backup_2023oct22/AI",
+          "abs_path_fallback": "E:/OneDrive/Backup_2023oct22/AI/doctor_suave_charming_cuddle_pirate_sailing_the_vast_seas_of_ch_d0e9691b-d290-49d2-a6f4-40adacf87903.png"
+        },
+        {
+          "sha256": null,
+          "relative_path": "doctor_suave_charming_cuddle_pirate_sailing_the_vast_seas_of_ch_f7448bfa-4ece-4d5b-947d-f7341eeaa2c4.png",
+          "source_root": "E:/OneDrive/Backup_2023oct22/AI",
+          "abs_path_fallback": "E:/OneDrive/Backup_2023oct22/AI/doctor_suave_charming_cuddle_pirate_sailing_the_vast_seas_of_ch_f7448bfa-4ece-4d5b-947d-f7341eeaa2c4.png"
+        }
       ]
     },
     {
@@ -61,6 +161,32 @@
         "E:/OneDrive/Backup_2023oct22/AI/doctor_the_bunny_pirate_sailing_forward_through_a_childs_dream__99354c67-7fda-498a-9857-e0dde6909f13.png",
         "E:/OneDrive/Backup_2023oct22/AI/doctor_the_bunny_pirate_sailing_forward_through_a_childs_dream__ae9e5fb6-b9df-4a7b-a024-98c3abcda88e.png",
         "E:/OneDrive/Backup_2023oct22/AI/doctor_the_bunny_pirate_sailing_forward_through_a_childs_dream__ea9f4da1-f967-4d11-bda4-a22a12e841bd.png"
+      ],
+      "file_refs": [
+        {
+          "sha256": null,
+          "relative_path": "doctor_the_bunny_pirate_sailing_forward_through_a_childs_dream__6ded72af-afc6-4f52-93f7-c643da6e1fc8.png",
+          "source_root": "E:/OneDrive/Backup_2023oct22/AI",
+          "abs_path_fallback": "E:/OneDrive/Backup_2023oct22/AI/doctor_the_bunny_pirate_sailing_forward_through_a_childs_dream__6ded72af-afc6-4f52-93f7-c643da6e1fc8.png"
+        },
+        {
+          "sha256": null,
+          "relative_path": "doctor_the_bunny_pirate_sailing_forward_through_a_childs_dream__99354c67-7fda-498a-9857-e0dde6909f13.png",
+          "source_root": "E:/OneDrive/Backup_2023oct22/AI",
+          "abs_path_fallback": "E:/OneDrive/Backup_2023oct22/AI/doctor_the_bunny_pirate_sailing_forward_through_a_childs_dream__99354c67-7fda-498a-9857-e0dde6909f13.png"
+        },
+        {
+          "sha256": null,
+          "relative_path": "doctor_the_bunny_pirate_sailing_forward_through_a_childs_dream__ae9e5fb6-b9df-4a7b-a024-98c3abcda88e.png",
+          "source_root": "E:/OneDrive/Backup_2023oct22/AI",
+          "abs_path_fallback": "E:/OneDrive/Backup_2023oct22/AI/doctor_the_bunny_pirate_sailing_forward_through_a_childs_dream__ae9e5fb6-b9df-4a7b-a024-98c3abcda88e.png"
+        },
+        {
+          "sha256": null,
+          "relative_path": "doctor_the_bunny_pirate_sailing_forward_through_a_childs_dream__ea9f4da1-f967-4d11-bda4-a22a12e841bd.png",
+          "source_root": "E:/OneDrive/Backup_2023oct22/AI",
+          "abs_path_fallback": "E:/OneDrive/Backup_2023oct22/AI/doctor_the_bunny_pirate_sailing_forward_through_a_childs_dream__ea9f4da1-f967-4d11-bda4-a22a12e841bd.png"
+        }
       ]
     }
   ],
@@ -70,10 +196,25 @@
     "files": [
       "E:/OneDrive/Backup_2023oct22/Desktop/Cuddle1.PNG",
       "E:/OneDrive/Backup_2023oct22/Desktop/Cuddle2.PNG"
+    ],
+    "file_refs": [
+      {
+        "sha256": null,
+        "relative_path": "Cuddle1.PNG",
+        "source_root": "E:/OneDrive/Backup_2023oct22/Desktop",
+        "abs_path_fallback": "E:/OneDrive/Backup_2023oct22/Desktop/Cuddle1.PNG"
+      },
+      {
+        "sha256": null,
+        "relative_path": "Cuddle2.PNG",
+        "source_root": "E:/OneDrive/Backup_2023oct22/Desktop",
+        "abs_path_fallback": "E:/OneDrive/Backup_2023oct22/Desktop/Cuddle2.PNG"
+      }
     ]
   },
   "totals": {
     "characters": 3,
     "images": 22
-  }
+  },
+  "portable_refs_note": "Each file entry now has portable refs: {sha256 (null until cataloged), relative_path, source_root, abs_path_fallback}. sha256 computed by Archivist when source_roots are accessible."
 }

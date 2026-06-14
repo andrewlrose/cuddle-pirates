@@ -1,0 +1,1392 @@
+Delivered-To: michaelcmay@gmail.com
+Received: by 2002:a05:6021:413:b0:2cc:d8ea:b3fd with SMTP id nu19csp1032202wdb;
+        Thu, 7 Mar 2024 21:43:20 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGg9pa3MhtaNwmPV8VEDD4CKW0qpT2LKE0aVmX5oTMef+uSiAO2ymZuVaccr3TI3SPkVxKJ
+X-Received: by 2002:a17:90a:cc0e:b0:29b:b1d2:2441 with SMTP id b14-20020a17090acc0e00b0029bb1d22441mr827945pju.26.1709876599895;
+        Thu, 07 Mar 2024 21:43:19 -0800 (PST)
+ARC-Seal: i=2; a=rsa-sha256; t=1709876599; cv=pass;
+        d=google.com; s=arc-20160816;
+        b=CO+QbwrEWeCl7usVoBjOZnYvj7cAn4j3sxi/bnDh0aXi93wmf03YxQ1/RSImHaapDo
+         jbBehqzWvwKbRx0/9xYkhPwICl9NTfljiBK/xvbCxp/gfo8J5zDDzDIESoiPgm1ogPS7
+         2ufhxcjLHfmHwJG1VFna4jY3WEiJ4RCFREn4mdsQaS/J9VEvjuBroBKdWZNN21ObFNsf
+         EWV8LiqpFpIDg4So6LYTPFNV7hTP56L64Lg3tNv/lPmOA6aPzLnI7BSIe8Qr+TYytaTF
+         +5GyuvNv5XUzYUxYFn6RTYarFDA2vYzx4M7t8BggG0/9uOpNccokF+4RvPpq/AQfd2Wp
+         JMQA==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=mime-version:content-language:accept-language:in-reply-to
+         :references:message-id:date:thread-index:thread-topic:subject:to
+         :from:dkim-signature;
+        bh=W038wRaA9GePMl17Yq8I7kAfWcRFYkRG4U9Ay1chwEw=;
+        fh=luUGMiD5hnyEiGZ406RDvJ0eQIN0l7uqkCqxdI+G+us=;
+        b=tmJ1ilmQVKpaASJYwAWbYd35sdFzQSZA+1B06WtGTt+3tmy2F8WntBDnRa0YXdrril
+         XMsaEwysjyA8YzZj2NUO05+14u7Uxcljkm60XzIk+apRZmreZw+72T2W3kSLgEgOXEjf
+         AHAs2H+f1RSkfM9dJ+m2wmZmrBJe5hRmAKcerMjPriKqbvxIPPSOzh5qALQGl3ktGhjf
+         bYmkFx2FqGVf2TTeBfLCCqlukS9DWRYFnARgQUEUyD5RiGei0gOb3SoNJ55ARz9POb7x
+         j+GBInmNNniJ9VXEQQTsTX6beOLYYflglCgZ3lS8soBIhblV5FQ/OQw9xc+WrBX6+9gy
+         Zpsw==;
+        dara=google.com
+ARC-Authentication-Results: i=2; mx.google.com;
+       dkim=pass header.i=@hotmail.com header.s=selector1 header.b=RtFfKfE6;
+       arc=pass (i=1);
+       spf=pass (google.com: domain of andrewlrose@hotmail.com designates 2a01:111:f403:2c14::801 as permitted sender) smtp.mailfrom=andrewlrose@hotmail.com;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=hotmail.com
+Return-Path: <andrewlrose@hotmail.com>
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com (mail-bn8nam11olkn20801.outbound.protection.outlook.com. [2a01:111:f403:2c14::801])
+        by mx.google.com with ESMTPS id cs19-20020a17090af51300b0029b0a24b98dsi3067781pjb.20.2024.03.07.21.43.19
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Thu, 07 Mar 2024 21:43:19 -0800 (PST)
+Received-SPF: pass (google.com: domain of andrewlrose@hotmail.com designates 2a01:111:f403:2c14::801 as permitted sender) client-ip=2a01:111:f403:2c14::801;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@hotmail.com header.s=selector1 header.b=RtFfKfE6;
+       arc=pass (i=1);
+       spf=pass (google.com: domain of andrewlrose@hotmail.com designates 2a01:111:f403:2c14::801 as permitted sender) smtp.mailfrom=andrewlrose@hotmail.com;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=hotmail.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Atm2bSa48rVbUtuQBYZWEh5YAOIxi3f/gu1w0xqSQcgR6ISFIydwPHc8K1a4nFasGDpQnYyf624Q3zP10Fc33sjzY/XFHQi4W3zsfM4YomQccBGl9AQZwHjZH0+jWO4DTBJlFlwsUGioG2e1K8Tls+4ECo3hkOPmexNKDgAkRrDMy/5qF7fgaJDyFaadj6GwrAhJULKBvX9Ljhl35EkygNae6Mqdi7z8hw+cmc2fWjQeX0VIHyuEt8P26LQcsP7FD4yte+FiVfoxfiHok0P+Ym8HXdhyzWF7L/z39H7MRn7shwB1gFFJ4uzVWNW0gGcNO/XbtDJnOnd7XwqjhkdjOg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=W038wRaA9GePMl17Yq8I7kAfWcRFYkRG4U9Ay1chwEw=;
+ b=msiaFxhpCVsQBuqeiJX41tgYrlGQ9EgEHU3yYMNjT8z6lk5DWbGttdkmpD+hXsYfusZtv5VA6cY1OA0AzFpep6QIvHMfsWHgNgYcu3EUv52wHdF55B6tH5q/BT2M2DVVQYTwlGi1jXUABhvzUEpSOWkbE1L6lCRJSkAb8gvtrtu/LeyfX/QoGwwnXHFEP+plH3sJKYSaEaI+BH5bd+x9G8uj9QTJxUlP9CR/y3yy7bbyeNill8eU5O0M4oNUUM0IzSLqVoQrTB4eLxl0+BhK0JVzdA+wb7gPbagnFgSfRT17KmmGmdTEkp8pl/4PJDQecrWM6hWY3bQpmf/1Ggfu3Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=W038wRaA9GePMl17Yq8I7kAfWcRFYkRG4U9Ay1chwEw=;
+ b=RtFfKfE6xOOd9RF74auS3dTFSNnZ46auPy2cSBLGG1eZsaPikPVPzAvuzQW/wn/R/o/BJFHMsuLZ+ViproL0pzHoQBqU3cArMl8DKA7NoN/ViO+YheOYWuJOKZq3xZTHRKYKaixyTcbcIeY5DvDHXexOOsZhzqkXld0NHOaZsZh5VW98wOFwaCMRxAUvMdolSffFzBVEEGd9x4VU4MrBqqXDjLUIjAz6BCJbAKDnCUEcbZOq352VFxed0blK3dm9+X/io/Uyr0wpJ8KPhN5lQuvO+cIqv3xdmzYVeSNaJ+mzG7omQT4Tp0ait0c8f2vuMg7oiIvcHQU7BWg6VBWRhw==
+Received: from IA1PR12MB6307.namprd12.prod.outlook.com (2603:10b6:208:3e5::22)
+ by PH8PR12MB7112.namprd12.prod.outlook.com (2603:10b6:510:22c::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7339.39; Fri, 8 Mar
+ 2024 05:43:16 +0000
+Received: from IA1PR12MB6307.namprd12.prod.outlook.com
+ ([fe80::75b2:c140:36c1:5f8e]) by IA1PR12MB6307.namprd12.prod.outlook.com
+ ([fe80::75b2:c140:36c1:5f8e%4]) with mapi id 15.20.7362.019; Fri, 8 Mar 2024
+ 05:43:16 +0000
+From: andrew rose <andrewlrose@hotmail.com>
+To: mike may <michaelcmay@gmail.com>, "valverde117@gmail.com"
+	<valverde117@gmail.com>, Jess Schulte <jschulte78@gmail.com>
+Subject: Fwd: more Cuddle Pirate notes
+Thread-Topic: more Cuddle Pirate notes
+Thread-Index: AQHZgLy7ogmO/XNPeUWXfS+Az8Fv/K9PLi7ugAGg3gCB3mZZ0w==
+Date: Fri, 8 Mar 2024 05:43:16 +0000
+Message-ID:
+ <IA1PR12MB63071798E888AA9F71C44A2FA3272@IA1PR12MB6307.namprd12.prod.outlook.com>
+References:
+ <IA1PR12MB630739E8F2B9045065BC93A2A3709@IA1PR12MB6307.namprd12.prod.outlook.com>
+ <IA1PR12MB6307A13CB9877C018FD97637A3709@IA1PR12MB6307.namprd12.prod.outlook.com>
+ <CAL7qoevJrNv=a9Zbjt-MPyfbMV17EUs5DZk+uvkCxzaLqcitCw@mail.gmail.com>
+In-Reply-To:
+ <CAL7qoevJrNv=a9Zbjt-MPyfbMV17EUs5DZk+uvkCxzaLqcitCw@mail.gmail.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator:
+x-ms-exchange-messagesentrepresentingtype: 1
+x-tmn: [XiJQMrelPBBn8hOTQyV/GJZDwHIJzxpq]
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: IA1PR12MB6307:EE_|PH8PR12MB7112:EE_
+x-ms-office365-filtering-correlation-id: 6e632634-f841-4092-35a4-08dc3f32a6ec
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info:
+ ZybK2CZPKndc7mdkBAlHN6qLWaLUibcXRbEzLGb5mvph+7uc/ps85g8igbclvxThaY6bVA2M+6BQxPIaViwa8xWnlQ6/eEnVfsox+xyIll1GO8RtvZ0rwsqlJaK4TVMkw+ZJKJKXDFqlpqlZAZi8Cack9eDkC+leMcU9U/xfcDEKMWiSRtM4QQfDblMjALCR2ZDnbknOMxlNEILdUTbUYUB5PNfPTsKKGQiJlemnu9r0k68O9KWyYHoKHSsLawH2MPdruHZzRGkIaqMlRYssThXU70tuCGTw7PKYStpo6TqT4pfL8DBxA/H8fNx7hAdZRXUKpRColqTFZl9qduf0KO0s62RYZEZJVAkOv7dIHsMxOHUty/D5L4zdkxaM209Ha4wphkkzPUr5Fv43F+2+FsSqsnxxFZ0jbURcRaSlG6915ktPbX/m+AQIgeZ/Wny5JAtYTbkSj04Wnnh6N8EPDzppqzyJYFYQ+MzcGZ9WzHVS5Lef6Vm2vBghtUHWnyJbBee7Anhjm6sXoiFWS+3qE6sqfBB+762JSMEpvNWa16wXACmXI6Eq88vqghCD94aPchA7J2DgiiCJqhe17A3xkG92PqMVVrcgmSIIPVV3Gm7Fv2QVabmX0dBtcTy5p4PDx5rX2nuJkIm4HrkjJCf8aTaJYsPEYHNuiyuyWR4e6fJJBPyt3RSXHVa8ZuNeyrlVViEaplne+fgnlyw5W2MrinvHbYP7MSgYWY6GZCWMjsaaga38aYcuuGe3fSadI9styv5rrqWFpsL0OzqT+zwN7nnig8vMIpZyX2AsZKAXqhM=
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?us-ascii?Q?5qSEhAcBAs1xsb260rfVMhcSwJtkLBkvYLxBnTOHR2c50nCEyTBKzvaeycHl?=
+ =?us-ascii?Q?WbIFel7kp1R4ZrkeYqHG62AqroZyJ7oM/IsJm4CH9JJON3GdzOnxmYgH69tH?=
+ =?us-ascii?Q?wK4sQ2LuVOaVRr5ULEgxYKHETJi8BlQse+8dZhs45iD8Om8lw+YTGt27QmKg?=
+ =?us-ascii?Q?wrJG8LBTCi/aAg6Gam2Hq+bxZfvpqfNiSSQMi+On2ivCE7erz7l2TQXbLho4?=
+ =?us-ascii?Q?JCWhIjKsrZaqllDsZ4RozS76qyyiMqY4jecWw8RPqAXwUsI0AMLQLIRmpxfs?=
+ =?us-ascii?Q?fDdoco/qL3YKyb+HiRn0jVCYK00b3h8wf+aCOEt+RdDV5SRiLF8N5bKh2NNn?=
+ =?us-ascii?Q?oLzIRk0N+W7XnGJDlqUlsNg1qdMj0QLaI6CKUmP8gWWXqkNPaOMfxMNCowU+?=
+ =?us-ascii?Q?JkQROg/WytmecCIaCGnNy05TqRdy+03QxPg831AwG3kj+6VF5gmk5ExVRAmY?=
+ =?us-ascii?Q?M6+it6bjUvLHT4cFifLzAmkDSgHOhhq1Ke0ScMfwd8em3OT5NPSFyWVRJQgp?=
+ =?us-ascii?Q?K0vM9cjtNB6lSM1bRRMnF5w31e/s85EBiIJwK4Hm7ZzkYLZN+jAGmmTDa47b?=
+ =?us-ascii?Q?iJm19DWTbGnHwsykbRkIWvjs8PFeL51Wb0FUf0pLChbwgnIwTkch08ku87pA?=
+ =?us-ascii?Q?/pxXxxnTieq8M35FntOuEs0SXgnOsakE9jlLWWPmOBkVPxycwEHGERTdOXzZ?=
+ =?us-ascii?Q?1Ci0VSO3bYDHaAswWGo8nNEM9Wh5Edq6h97lznkcddT/lfNhMCokzR+fxop6?=
+ =?us-ascii?Q?C3jtMCB3aZP97DTA/kmHV6zagbDp0r3oOiu472C0700gQa1Q5ltNDZCSY4w0?=
+ =?us-ascii?Q?qiXwofdfMLr6VMljNQFyzq15eyiaLkglucT2w93PJeVKqh5LbNa3gTek/5m4?=
+ =?us-ascii?Q?S1tCXenYmtJp7uWYQ03wOs8vXRHHLtkRfwwAofCdgjlRihyZu24uX19pMQL1?=
+ =?us-ascii?Q?yWwScUuwVh8rsw7RFMs4sDSBH54IpyzZvOO8rb040p/o0HL9EMsYDkiyFfSV?=
+ =?us-ascii?Q?ZPibFCQ6cmeduDrfTahv3xY+waxHxtvYN+676Piy0ACVs2JF/YaWw92UeQ10?=
+ =?us-ascii?Q?k2It3gFrPQwDmlOx/Amvs6nWuGByAySmiEdZxhPv1RzRSlykEjo7cLdJ/llL?=
+ =?us-ascii?Q?4/8pl3+JMzD6Tr1Ym7tecFAwFOmseYicRzhm2N9yf7xdjSMN/6gJ0bobo7S6?=
+ =?us-ascii?Q?QJCRvZ7HyT6IWwP5SSCpo/6gKNLsDTCn2US/r0fm97+B0BH/Rye6DNf4oMQz?=
+ =?us-ascii?Q?XMuMffsNLgtKkI39kjhu?=
+Content-Type: multipart/mixed;
+	boundary="_006_IA1PR12MB63071798E888AA9F71C44A2FA3272IA1PR12MB6307namp_"
+MIME-Version: 1.0
+X-OriginatorOrg: sct-15-20-4755-11-msonline-outlook-71ea3.templateTenant
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: IA1PR12MB6307.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6e632634-f841-4092-35a4-08dc3f32a6ec
+X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Mar 2024 05:43:16.0827
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-rms-persistedconsumerorg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB7112
+
+--_006_IA1PR12MB63071798E888AA9F71C44A2FA3272IA1PR12MB6307namp_
+Content-Type: multipart/alternative;
+	boundary="_000_IA1PR12MB63071798E888AA9F71C44A2FA3272IA1PR12MB6307namp_"
+
+--_000_IA1PR12MB63071798E888AA9F71C44A2FA3272IA1PR12MB6307namp_
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+
+________________________________
+From: Matthew Valverde <valverde117@gmail.com>
+Sent: Monday, May 8, 2023 1:04:14 PM
+To: andrew rose <andrewlrose@hotmail.com>
+Cc: Jess Schulte <jschulte78@gmail.com>
+Subject: Re: more Cuddle Pirate notes
+
+That's pretty damn amazing. We can definitely start workshopping these forw=
+ard. I like a lot of these ideas it would be great to start that Miro board=
+. But yeah this is great. I know we can start working on a pitch deck with =
+all these goodies! We can definitely start putting together a cold open sho=
+rt. Which I'm sure would be the initial encounter with the cuddle pirates.
+
+I had this idea, that Junnie is gifted a new teddy bear, and it's his first=
+ night on the job. Things go well at first but then something happens and t=
+he cuddle pirates jump into action and teach/help the new bear on his way t=
+o being a successful teddy bear.  Also maybe  throw in simple learning mech=
+anics. For example 3 pillows go missing and the pirates say look! One two t=
+hree! Pillows are missing. Simple things like so. Or maybe not? Lol but let=
+'s keep it going!
+
+-M
+
+
+
+On Sun, May 7, 2023, 12:13 PM andrew rose <andrewlrose@hotmail.com<mailto:a=
+ndrewlrose@hotmail.com>> wrote:
+
+jeeez this ChatGPT makes it too easy.  here's a handful of other ideas for =
+the Cuddles.  it would not be hard to mine a feature length script out of t=
+his:
+
+Write another synopsis of a Cuddle Pirates adventure that incorporates a th=
+eory of what dreams are from antiquity
+ChatGPT
+
+Certainly! Here's a synopsis for a Cuddle Pirates adventure that incorporat=
+es an ancient theory about dreams:
+
+The Cuddle Pirates receive a distress signal from a little girl named Lily,=
+ who is experiencing strange and vivid dreams every night. Upon arriving in=
+ Lily's bedroom, the Cuddle Pirates discover that Lily's dreams are being a=
+ffected by a mischievous dream spirit known as Morpheus.
+
+Remembering an ancient theory about dreams, the Cuddle Pirates realize that=
+ Morpheus is stealing Lily's dreams in order to manipulate them for his own=
+ purposes. In order to save Lily's dreams, the Cuddle Pirates must venture =
+into the dream world and confront Morpheus.
+
+Once inside the dream world, the Cuddle Pirates encounter a labyrinthine la=
+ndscape full of twists and turns. They must use their plushie swords and sh=
+ields to fend off Morpheus' minions and navigate through the labyrinth to r=
+each the dream spirit's lair.
+
+As they confront Morpheus, the Cuddle Pirates discover that the dream spiri=
+t is lonely and craves attention. They convince Morpheus to abandon his mis=
+chief and instead use his powers to create positive and inspiring dreams fo=
+r Lily.
+
+With Morpheus' help, the Cuddle Pirates guide Lily through a series of wond=
+erful dreams that inspire her to be brave, kind, and adventurous. As they b=
+id Lily farewell, the Cuddle Pirates are content knowing that they have not=
+ only saved Lily's dreams, but also helped a lonely dream spirit find a new=
+ purpose.
+
+[X][User]
+that's great, write another synopsis along these lines
+ChatGPT
+
+Sure, here's another synopsis for a Cuddle Pirates adventure that incorpora=
+tes a theory about dreams:
+
+The Cuddle Pirates are called upon by a group of stuffed animals who live i=
+n a magical realm known as the Land of Dreams. The Land of Dreams is under =
+threat from a group of sinister dream eaters who are consuming all of the p=
+leasant and positive dreams, leaving only nightmares and fears in their wak=
+e.
+
+The Cuddle Pirates join forces with the stuffed animals to track down the d=
+ream eaters and put a stop to their nefarious plans. Using their plushie st=
+ealth and cunning, the Cuddle Pirates sneak into the dream eaters' lair and=
+ discover that the creatures are actually manifestations of negative though=
+ts and emotions.
+
+Remembering an ancient theory about dreams, the Cuddle Pirates realize that=
+ the dream eaters are a reflection of the fears and anxieties that people c=
+arry with them into the dream world. In order to defeat the dream eaters, t=
+he Cuddle Pirates must help the people of the Land of Dreams overcome their=
+ fears and embrace positivity.
+
+The Cuddle Pirates embark on a quest to find the source of the dream eaters=
+' power - a magical wellspring that draws energy from the negative thoughts=
+ and emotions of those who visit the Land of Dreams. With the help of the s=
+tuffed animals and the people of the Land of Dreams, the Cuddle Pirates are=
+ able to cleanse the wellspring of negativity and turn it into a source of =
+positive energy.
+
+As they bid farewell to their new friends, the Cuddle Pirates are pleased t=
+o see the Land of Dreams return to its former glory, full of wonder and del=
+ight. They sail off into the night, content knowing that they have helped b=
+ring light to a world once consumed by darkness.
+
+[X][User]
+What are some other ideas for narrative stories of adventure, dreams, bedti=
+me for the Cuddle Pirates
+ChatGPT
+
+Here are a few other ideas for narrative stories of adventure, dreams, and =
+bedtime for the Cuddle Pirates:
+
+  1.  The Cuddle Pirates discover a mysterious island where all of the drea=
+ms of the world are created. They must navigate a series of challenges to c=
+onvince the dream makers to allow them to stay and witness the creation of =
+dreams.
+
+  2.  The Cuddle Pirates go on a quest to find the legendary Dream Crystal,=
+ a powerful artifact said to have the ability to make any dream come true. =
+Along the way, they must fend off rival plushie pirates who also seek the c=
+rystal for their own nefarious purposes.
+
+  3.  The Cuddle Pirates come across a young child who has stopped dreaming=
+ altogether, and must help her rediscover the joy of imagination and creati=
+vity. Along the way, they encounter a group of mischievous dream sprites wh=
+o have been causing chaos in the child's dreamscape.
+
+  4.  The Cuddle Pirates must protect a young prince who is being haunted b=
+y a nightmare that has come to life. They must journey deep into the dream =
+world to confront the nightmare and put an end to its reign of terror.
+
+  5.  The Cuddle Pirates stumble upon a group of dream travelers who have b=
+ecome stranded in the dream world. They must help the travelers find their =
+way back to the waking world before they become trapped in the dream world =
+forever.
+
+________________________________
+From: andrew rose
+Sent: Sunday, May 7, 2023 12:04 PM
+To: Jess Schulte <jschulte78@gmail.com<mailto:jschulte78@gmail.com>>; valve=
+rde117@gmail.com<mailto:valverde117@gmail.com> <valverde117@gmail.com<mailt=
+o:valverde117@gmail.com>>
+Subject: more Cuddle Pirate notes
+
+I input the notes that I sent you about the Cuddle Pirates crew into ChatGP=
+T and asked it to come up with some story ideas.  The first one it came up =
+with, about Max, was kinda interesting.  Not sure where it was going with t=
+he second idea:
+
+
+
+Combine the description of all of the Cuddle Pirates characters, their ship=
+ and home island, along with their mission, and the story of Juniper
+ChatGPT
+
+The Cuddle Pirates were a merry band of plushie pirates who roamed the seas=
+ of dreams, commandeering bedtime and putting on shows for little children =
+in the middle of the night. They were led by Sir Fuzzy Drake, a fearless an=
+d fluffy captain, and his trusty crew of Marco Pillow, Vasco Pajamas, Long =
+John Snuggle, Plushy de Leon, Feathernand Magellan, Anne Bunny, and Jean La=
+Fluffe.
+
+Their ship, The Fluffy Dutchman, was a magical vessel that could transform =
+into a giant pillowcase, with the legs of the crew sticking out the bottom =
+so they could run with it when they needed to escape. The Cuddle Pirates li=
+ved on Puff-tooga, their Cuddle Pirate Island, where they had built a cozy =
+hideaway made entirely of soft, plushy materials.
+
+Their mission was to protect children from the monsters that lurked in the =
+shadows of the night, and to ensure that every child had sweet dreams and a=
+ restful sleep. They would sneak into children's bedrooms, entertaining the=
+m with acrobatic ragdoll antics and telling them bedtime stories, all while=
+ dodging the watchful eyes of parents.
+
+One night, the Cuddle Pirates snuck into little Juniper's room and put on a=
+ show for her. While dodging Juniper's Mom so they remain invisible, they e=
+ntertained her with their acrobatic ragdoll antics show. With Mom distracte=
+d across the hall doing laundry, Juniper admitted to the Cuddles that she w=
+as sad about her missing sock, and the Cuddle Pirates told her a bedtime st=
+ory, but they were interrupted by the monster under her bed, the Kraken.
+
+The Cuddle Pirates sprang into action, brandishing their plushie swords and=
+ shields, and battled the Kraken to protect Juniper. With the monster vanqu=
+ished, the pirates searched for Juniper's missing sock and found it hidden =
+in the laundry basket. Juniper was overjoyed and thanked the Cuddle Pirates=
+ for their help.
+
+The Cuddle Pirates reminded Juniper to keep believing in the magic of bedti=
+me, and promised to always be there to protect her. With a smile on her fac=
+e and her missing sock back where it belonged, Juniper drifted off to sleep=
+, feeling safe and loved by her new friends, the Cuddle Pirates.
+
+The Cuddle Pirates sailed off into the night, their fluffy plunder of comfi=
+est pillows and softest blankies in all the world safe in their pillowcase =
+ship, The Fluffy Dutchman. As they returned to Puff-tooga, they laughed and=
+ joked about the night's adventure, looking forward to their next mission t=
+o protect the dreams of children everywhere.
+
+[cid:923ccc66-4e46-4bd0-9254-adc0b9b5882e][User]
+Give me a synopsis for another short story of the Cuddle Pirates adventures
+ChatGPT
+
+The Cuddle Pirates are on a mission to help a little boy named Max, who is =
+having trouble sleeping due to nightmares. They sneak into his room and dis=
+cover that Max's dreams are being haunted by a fierce dragon. The Cuddle Pi=
+rates quickly come up with a plan to help Max face his fears and defeat the=
+ dragon.
+
+They create a magical potion made of warm milk and honey, which they give t=
+o Max to help him relax and fall asleep. As Max drifts off, the Cuddle Pira=
+tes use their plushie swords and shields to conjure up a dream world where =
+Max can face the dragon and defeat it in battle.
+
+Max is nervous at first, but with the encouragement of the Cuddle Pirates, =
+he finds the courage to face the dragon head-on. They battle fiercely, but =
+Max ultimately emerges victorious. As he wakes up, Max is filled with a sen=
+se of accomplishment and pride, and thanks the Cuddle Pirates for helping h=
+im conquer his fears.
+
+The Cuddle Pirates bid Max farewell and sail off into the night, their fluf=
+fy plunder safe in their pillowcase ship, The Fluffy Dutchman. They look fo=
+rward to their next mission to protect the dreams of children everywhere.
+
+[cid:6212afd9-a962-44fe-8095-62633d6c97ff][User]
+That is a great start, write another synopsis for the Cuddle Pirates
+ChatGPT
+
+Sure, here's another synopsis for a Cuddle Pirates adventure:
+
+The Cuddle Pirates are called upon by a group of stuffed animal friends to =
+help save their beloved toy store from closing down. The toy store has been=
+ struggling to stay afloat due to increased competition from online retaile=
+rs.
+
+The Cuddle Pirates hatch a plan to create a grand display in the toy store'=
+s window, featuring all of the store's most popular toys. They work tireles=
+sly through the night, setting up the display and making sure everything lo=
+oks perfect.
+
+The next morning, passersby are drawn to the colorful window display and fl=
+ock to the toy store to check it out. Business at the store picks up, and t=
+he Cuddle Pirates are delighted to see the smiles on the faces of children =
+and parents alike.
+
+As a token of their appreciation, the stuffed animal friends present the Cu=
+ddle Pirates with a special treasure - a rare plushie unicorn that had been=
+ missing from the store for years. The Cuddle Pirates are thrilled with the=
+ir new addition to the crew, and sail off into the night, happy to have sav=
+ed the toy store and made so many new friends along the way.
+
+
+
+Andrew Rose / Virtual Production - Performance Capture Specialist
+
+andrewlrose@hotmail.com<mailto:andrewlrose@hotmail.com> / 3106214166
+
+linkedin.com/in/andrewlrose<https://signature-maker.net/linkedin.com/in/and=
+rewlrose>
+
+
+--_000_IA1PR12MB63071798E888AA9F71C44A2FA3272IA1PR12MB6307namp_
+Content-Type: text/html; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
+>
+</head>
+<body>
+<div><br>
+</div>
+<hr style=3D"display:inline-block;width:98%" tabindex=3D"-1">
+<div id=3D"divRplyFwdMsg" dir=3D"ltr"><font face=3D"Calibri, sans-serif" st=
+yle=3D"font-size:11pt" color=3D"#000000"><b>From:</b> Matthew Valverde &lt;=
+valverde117@gmail.com&gt;<br>
+<b>Sent:</b> Monday, May 8, 2023 1:04:14 PM<br>
+<b>To:</b> andrew rose &lt;andrewlrose@hotmail.com&gt;<br>
+<b>Cc:</b> Jess Schulte &lt;jschulte78@gmail.com&gt;<br>
+<b>Subject:</b> Re: more Cuddle Pirate notes</font>
+<div>&nbsp;</div>
+</div>
+<div>
+<div dir=3D"auto">That's pretty damn amazing. We can definitely start works=
+hopping these forward. I like a lot of these ideas it would be great to sta=
+rt that Miro board. But yeah this is great. I know we can start working on =
+a pitch deck with all these goodies!
+ We can definitely start putting together a cold open short. Which I'm sure=
+ would be the initial encounter with the cuddle pirates.&nbsp;
+<div dir=3D"auto"><br>
+</div>
+<div dir=3D"auto">I had this idea, that Junnie is gifted a new teddy bear, =
+and it's his first night on the job. Things go well at first but then somet=
+hing happens and the cuddle pirates jump into action and teach/help the new=
+ bear on his way to being a successful
+ teddy bear.&nbsp; Also maybe&nbsp; throw in simple learning mechanics. For=
+ example 3 pillows go missing and the pirates say look! One two three! Pill=
+ows are missing. Simple things like so. Or maybe not? Lol but let's keep it=
+ going!&nbsp;</div>
+<div dir=3D"auto"><br>
+</div>
+<div dir=3D"auto">-M</div>
+<div dir=3D"auto"><br>
+</div>
+<div dir=3D"auto"><br>
+</div>
+</div>
+<br>
+<div class=3D"x_gmail_quote">
+<div dir=3D"ltr" class=3D"x_gmail_attr">On Sun, May 7, 2023, 12:13 PM andre=
+w rose &lt;<a href=3D"mailto:andrewlrose@hotmail.com">andrewlrose@hotmail.c=
+om</a>&gt; wrote:<br>
+</div>
+<blockquote class=3D"x_gmail_quote" style=3D"margin:0 0 0 .8ex; border-left=
+:1px #ccc solid; padding-left:1ex">
+<div dir=3D"ltr">
+<div style=3D"font-family:Calibri,Helvetica,sans-serif; font-size:12pt; col=
+or:rgb(0,0,0)">
+<br>
+</div>
+<div style=3D"font-family:Calibri,Helvetica,sans-serif; font-size:12pt; col=
+or:rgb(0,0,0)">
+jeeez this ChatGPT makes it too easy.&nbsp; here's a handful of other ideas=
+ for the Cuddles.&nbsp; it would not be hard to mine a feature length scrip=
+t out of this:</div>
+<div style=3D"font-family:Calibri,Helvetica,sans-serif; font-size:12pt; col=
+or:rgb(0,0,0)">
+<br>
+</div>
+<div style=3D"font-family:Calibri,Helvetica,sans-serif; font-size:12pt; col=
+or:rgb(0,0,0)">
+<div style=3D"border-width:0px 0px 1px; border-style:solid; border-color:rg=
+ba(0,0,0,0.1); box-sizing:border-box; font-size:14px">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; mar=
+gin:auto; display:flex; padding:1.5rem 0px; font-size:1rem; line-height:1.5=
+rem; max-width:48rem">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex">
+<span style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; di=
+splay:flex; min-height:20px">Write another synopsis of a Cuddle Pirates adv=
+enture that incorporates a theory of what dreams are from antiquity</span><=
+/div>
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; mar=
+gin-top:0px; display:flex; padding-left:0.5rem">
+<button style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; =
+font-size:16px; margin:0px; padding:0.25rem; background-image:none; border-=
+radius:0.375rem">
+<span height=3D"1em" width=3D"1em"><span></span><span></span></span></butto=
+n></div>
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:block">
+</div>
+</div>
+</div>
+</div>
+<div style=3D"border-width:0px 0px 1px; border-style:solid; border-color:rg=
+ba(0,0,0,0.1); box-sizing:border-box; font-size:14px">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; mar=
+gin:auto; display:flex; padding:1.5rem 0px; font-size:1rem; line-height:1.5=
+rem; max-width:48rem">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex; height:30px; border-radius:0.125rem; padding:0.25rem; background=
+-color:rgb(16,163,127)">
+<span width=3D"41" height=3D"41"><span>ChatGPT</span><span></span></span></=
+div>
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex; font-size:0.75rem; line-height:1rem">
+<button disabled=3D"" style=3D"border:0px solid rgb(217,217,227); box-sizin=
+g:border-box; font-size:12px; margin:0px; background-image:none">
+<span height=3D"1em" width=3D"1em"><span></span></span></button><span style=
+=3D"border:0px solid rgb(217,217,227); box-sizing:border-box"></span>
+<button disabled=3D"" style=3D"border:0px solid rgb(217,217,227); box-sizin=
+g:border-box; font-size:12px; margin:0px; background-image:none">
+<span height=3D"1em" width=3D"1em"><span></span></span></button></div>
+</div>
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex; min-height:20px">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; max=
+-width:none; line-height:1.75">
+<p style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; margi=
+n:0px 0px 1.25em">
+Certainly! Here's a synopsis for a Cuddle Pirates adventure that incorporat=
+es an ancient theory about dreams:</p>
+<p style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; margi=
+n:1.25em 0px">
+The Cuddle Pirates receive a distress signal from a little girl named Lily,=
+ who is experiencing strange and vivid dreams every night. Upon arriving in=
+ Lily's bedroom, the Cuddle Pirates discover that Lily's dreams are being a=
+ffected by a mischievous dream spirit
+ known as Morpheus.</p>
+<p style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; margi=
+n:1.25em 0px">
+Remembering an ancient theory about dreams, the Cuddle Pirates realize that=
+ Morpheus is stealing Lily's dreams in order to manipulate them for his own=
+ purposes. In order to save Lily's dreams, the Cuddle Pirates must venture =
+into the dream world and confront
+ Morpheus.</p>
+<p style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; margi=
+n:1.25em 0px">
+Once inside the dream world, the Cuddle Pirates encounter a labyrinthine la=
+ndscape full of twists and turns. They must use their plushie swords and sh=
+ields to fend off Morpheus' minions and navigate through the labyrinth to r=
+each the dream spirit's lair.</p>
+<p style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; margi=
+n:1.25em 0px">
+As they confront Morpheus, the Cuddle Pirates discover that the dream spiri=
+t is lonely and craves attention. They convince Morpheus to abandon his mis=
+chief and instead use his powers to create positive and inspiring dreams fo=
+r Lily.</p>
+<p style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; margi=
+n:1.25em 0px 0px">
+With Morpheus' help, the Cuddle Pirates guide Lily through a series of wond=
+erful dreams that inspire her to be brave, kind, and adventurous. As they b=
+id Lily farewell, the Cuddle Pirates are content knowing that they have not=
+ only saved Lily's dreams, but also
+ helped a lonely dream spirit find a new purpose.</p>
+</div>
+</div>
+</div>
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:block">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; mar=
+gin-top:0px; display:flex; padding-left:0.5rem">
+<button style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; =
+font-size:16px; margin:0px 0px 0px auto; padding:0.25rem; background-image:=
+none; display:flex; height:24px; width:24px; border-radius:0.375rem">
+<span height=3D"1em" width=3D"1em"><span></span><span width=3D"8" height=3D=
+"4"></span></span>
+</button><button style=3D"border:0px solid rgb(217,217,227); box-sizing:bor=
+der-box; font-size:16px; margin:0px; padding:0.25rem; background-image:none=
+; border-radius:0.375rem">
+<span height=3D"1em" width=3D"1em"><span></span></span></button><button sty=
+le=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; font-size:1=
+6px; margin:0px; padding:0.25rem; background-image:none; border-radius:0.37=
+5rem">
+<span height=3D"1em" width=3D"1em"><span></span></span></button></div>
+</div>
+</div>
+</div>
+</div>
+<div style=3D"border-width:0px 0px 1px; border-style:solid; border-color:rg=
+ba(0,0,0,0.1); box-sizing:border-box; font-size:14px">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; mar=
+gin:auto; display:flex; padding:1.5rem 0px; font-size:1rem; line-height:1.5=
+rem; max-width:48rem">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex">
+<span style=3D"box-sizing:border-box; display:inline-block; overflow:hidden=
+; background:none; opacity:1; margin:0px; max-width:100%"><span style=3D"bo=
+x-sizing:border-box; display:block; background:none; opacity:1; margin:0px;=
+ max-width:100%"><img alt=3D"" style=3D"box-sizing:border-box; display:bloc=
+k; vertical-align:middle; max-width:100%; background:none; opacity:1; margi=
+n:0px"></span><img alt=3D"User" src=3D"https://chat.openai.com/_next/image?=
+url=3Dhttps%3A%2F%2Fs.gravatar.com%2Favatar%2F818fb4233b230c268d98e9606842f=
+e74%3Fs%3D480%26r%3Dpg%26d%3Dhttps%253A%252F%252Fcdn.auth0.com%252Favatars%=
+252Fan.png&amp;w=3D96&amp;q=3D75" style=3D"border:none; box-sizing:border-b=
+ox; display:block; vertical-align:middle; height:0px; max-width:100%; borde=
+r-radius:0.125rem; margin:auto; width:0px; min-width:100%; min-height:100%;=
+ max-height:100%"></span></div>
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex; font-size:0.75rem; line-height:1rem">
+<button disabled=3D"" style=3D"border:0px solid rgb(217,217,227); box-sizin=
+g:border-box; font-size:12px; margin:0px; background-image:none">
+<span height=3D"1em" width=3D"1em"><span></span></span></button><span style=
+=3D"border:0px solid rgb(217,217,227); box-sizing:border-box"></span>
+<button disabled=3D"" style=3D"border:0px solid rgb(217,217,227); box-sizin=
+g:border-box; font-size:12px; margin:0px; background-image:none">
+<span height=3D"1em" width=3D"1em"><span></span></span></button></div>
+</div>
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex; min-height:20px">
+that's great, write another synopsis along these lines</div>
+</div>
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; mar=
+gin-top:0px; display:flex; padding-left:0.5rem">
+<button style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; =
+font-size:16px; margin:0px; padding:0.25rem; background-image:none; border-=
+radius:0.375rem">
+<span height=3D"1em" width=3D"1em"><span></span><span></span></span></butto=
+n></div>
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:block">
+</div>
+</div>
+</div>
+</div>
+<div style=3D"border-width:0px 0px 1px; border-style:solid; border-color:rg=
+ba(0,0,0,0.1); box-sizing:border-box; font-size:14px">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; mar=
+gin:auto; display:flex; padding:1.5rem 0px; font-size:1rem; line-height:1.5=
+rem; max-width:48rem">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex; height:30px; border-radius:0.125rem; padding:0.25rem; background=
+-color:rgb(16,163,127)">
+<span width=3D"41" height=3D"41"><span>ChatGPT</span><span></span></span></=
+div>
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex; font-size:0.75rem; line-height:1rem">
+<button disabled=3D"" style=3D"border:0px solid rgb(217,217,227); box-sizin=
+g:border-box; font-size:12px; margin:0px; background-image:none">
+<span height=3D"1em" width=3D"1em"><span></span></span></button><span style=
+=3D"border:0px solid rgb(217,217,227); box-sizing:border-box"></span>
+<button disabled=3D"" style=3D"border:0px solid rgb(217,217,227); box-sizin=
+g:border-box; font-size:12px; margin:0px; background-image:none">
+<span height=3D"1em" width=3D"1em"><span></span></span></button></div>
+</div>
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex; min-height:20px">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; max=
+-width:none; line-height:1.75">
+<p style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; margi=
+n:0px 0px 1.25em">
+Sure, here's another synopsis for a Cuddle Pirates adventure that incorpora=
+tes a theory about dreams:</p>
+<p style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; margi=
+n:1.25em 0px">
+The Cuddle Pirates are called upon by a group of stuffed animals who live i=
+n a magical realm known as the Land of Dreams. The Land of Dreams is under =
+threat from a group of sinister dream eaters who are consuming all of the p=
+leasant and positive dreams, leaving
+ only nightmares and fears in their wake.</p>
+<p style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; margi=
+n:1.25em 0px">
+The Cuddle Pirates join forces with the stuffed animals to track down the d=
+ream eaters and put a stop to their nefarious plans. Using their plushie st=
+ealth and cunning, the Cuddle Pirates sneak into the dream eaters' lair and=
+ discover that the creatures are
+ actually manifestations of negative thoughts and emotions.</p>
+<p style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; margi=
+n:1.25em 0px">
+Remembering an ancient theory about dreams, the Cuddle Pirates realize that=
+ the dream eaters are a reflection of the fears and anxieties that people c=
+arry with them into the dream world. In order to defeat the dream eaters, t=
+he Cuddle Pirates must help the
+ people of the Land of Dreams overcome their fears and embrace positivity.<=
+/p>
+<p style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; margi=
+n:1.25em 0px">
+The Cuddle Pirates embark on a quest to find the source of the dream eaters=
+' power - a magical wellspring that draws energy from the negative thoughts=
+ and emotions of those who visit the Land of Dreams. With the help of the s=
+tuffed animals and the people of
+ the Land of Dreams, the Cuddle Pirates are able to cleanse the wellspring =
+of negativity and turn it into a source of positive energy.</p>
+<p style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; margi=
+n:1.25em 0px 0px">
+As they bid farewell to their new friends, the Cuddle Pirates are pleased t=
+o see the Land of Dreams return to its former glory, full of wonder and del=
+ight. They sail off into the night, content knowing that they have helped b=
+ring light to a world once consumed
+ by darkness.</p>
+</div>
+</div>
+</div>
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:block">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; mar=
+gin-top:0px; display:flex; padding-left:0.5rem">
+<button style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; =
+font-size:16px; margin:0px 0px 0px auto; padding:0.25rem; background-image:=
+none; display:flex; height:24px; width:24px; border-radius:0.375rem">
+<span height=3D"1em" width=3D"1em"><span></span><span width=3D"8" height=3D=
+"4"></span></span>
+</button><button style=3D"border:0px solid rgb(217,217,227); box-sizing:bor=
+der-box; font-size:16px; margin:0px; padding:0.25rem; background-image:none=
+; border-radius:0.375rem">
+<span height=3D"1em" width=3D"1em"><span></span></span></button><button sty=
+le=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; font-size:1=
+6px; margin:0px; padding:0.25rem; background-image:none; border-radius:0.37=
+5rem">
+<span height=3D"1em" width=3D"1em"><span></span></span></button></div>
+</div>
+</div>
+</div>
+</div>
+<div style=3D"border-width:0px 0px 1px; border-style:solid; border-color:rg=
+ba(0,0,0,0.1); box-sizing:border-box; font-size:14px">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; mar=
+gin:auto; display:flex; padding:1.5rem 0px; font-size:1rem; line-height:1.5=
+rem; max-width:48rem">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex">
+<span style=3D"box-sizing:border-box; display:inline-block; overflow:hidden=
+; background:none; opacity:1; margin:0px; max-width:100%"><span style=3D"bo=
+x-sizing:border-box; display:block; background:none; opacity:1; margin:0px;=
+ max-width:100%"><img alt=3D"" style=3D"box-sizing:border-box; display:bloc=
+k; vertical-align:middle; max-width:100%; background:none; opacity:1; margi=
+n:0px"></span><img alt=3D"User" src=3D"https://chat.openai.com/_next/image?=
+url=3Dhttps%3A%2F%2Fs.gravatar.com%2Favatar%2F818fb4233b230c268d98e9606842f=
+e74%3Fs%3D480%26r%3Dpg%26d%3Dhttps%253A%252F%252Fcdn.auth0.com%252Favatars%=
+252Fan.png&amp;w=3D96&amp;q=3D75" style=3D"border:none; box-sizing:border-b=
+ox; display:block; vertical-align:middle; height:0px; max-width:100%; borde=
+r-radius:0.125rem; margin:auto; width:0px; min-width:100%; min-height:100%;=
+ max-height:100%"></span></div>
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex; font-size:0.75rem; line-height:1rem">
+<button disabled=3D"" style=3D"border:0px solid rgb(217,217,227); box-sizin=
+g:border-box; font-size:12px; margin:0px; background-image:none">
+<span height=3D"1em" width=3D"1em"><span></span></span></button><span style=
+=3D"border:0px solid rgb(217,217,227); box-sizing:border-box"></span>
+<button disabled=3D"" style=3D"border:0px solid rgb(217,217,227); box-sizin=
+g:border-box; font-size:12px; margin:0px; background-image:none">
+<span height=3D"1em" width=3D"1em"><span></span></span></button></div>
+</div>
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex; min-height:20px">
+What are some other ideas for narrative stories of adventure, dreams, bedti=
+me for the Cuddle Pirates</div>
+</div>
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; mar=
+gin-top:0px; display:flex; padding-left:0.5rem">
+<button style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; =
+font-size:16px; margin:0px; padding:0.25rem; background-image:none; border-=
+radius:0.375rem">
+<span height=3D"1em" width=3D"1em"><span></span><span></span></span></butto=
+n></div>
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:block">
+</div>
+</div>
+</div>
+</div>
+<div style=3D"border-width:0px 0px 1px; border-style:solid; border-color:rg=
+ba(0,0,0,0.1); box-sizing:border-box; font-size:14px">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; mar=
+gin:auto; display:flex; padding:1.5rem 0px; font-size:1rem; line-height:1.5=
+rem; max-width:48rem">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex; height:30px; border-radius:0.125rem; padding:0.25rem; background=
+-color:rgb(16,163,127)">
+<span width=3D"41" height=3D"41"><span>ChatGPT</span><span></span></span></=
+div>
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex; font-size:0.75rem; line-height:1rem">
+<button disabled=3D"" style=3D"border:0px solid rgb(217,217,227); box-sizin=
+g:border-box; font-size:12px; margin:0px; background-image:none">
+<span height=3D"1em" width=3D"1em"><span></span></span></button><span style=
+=3D"border:0px solid rgb(217,217,227); box-sizing:border-box"></span>
+<button disabled=3D"" style=3D"border:0px solid rgb(217,217,227); box-sizin=
+g:border-box; font-size:12px; margin:0px; background-image:none">
+<span height=3D"1em" width=3D"1em"><span></span></span></button></div>
+</div>
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex; min-height:20px">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; max=
+-width:none; line-height:1.75">
+<p style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; margi=
+n:0px 0px 1.25em">
+Here are a few other ideas for narrative stories of adventure, dreams, and =
+bedtime for the Cuddle Pirates:</p>
+<ol style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; list=
+-style:decimal; margin:1.25em 0px 0px; padding:0px 0px 0px 1rem; display:fl=
+ex">
+<li style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; marg=
+in:0px; padding-left:0.375em">
+<p style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; margi=
+n:0px">The Cuddle Pirates discover a mysterious island where all of the dre=
+ams of the world are created. They must navigate a series of challenges to =
+convince the dream makers to allow
+ them to stay and witness the creation of dreams.</p>
+</li><li style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box;=
+ margin:0px; padding-left:0.375em">
+<p style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; margi=
+n:0px">The Cuddle Pirates go on a quest to find the legendary Dream Crystal=
+, a powerful artifact said to have the ability to make any dream come true.=
+ Along the way, they must fend off
+ rival plushie pirates who also seek the crystal for their own nefarious pu=
+rposes.</p>
+</li><li style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box;=
+ margin:0px; padding-left:0.375em">
+<p style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; margi=
+n:0px">The Cuddle Pirates come across a young child who has stopped dreamin=
+g altogether, and must help her rediscover the joy of imagination and creat=
+ivity. Along the way, they encounter
+ a group of mischievous dream sprites who have been causing chaos in the ch=
+ild's dreamscape.</p>
+</li><li style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box;=
+ margin:0px; padding-left:0.375em">
+<p style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; margi=
+n:0px">The Cuddle Pirates must protect a young prince who is being haunted =
+by a nightmare that has come to life. They must journey deep into the dream=
+ world to confront the nightmare and
+ put an end to its reign of terror.</p>
+</li><li style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box;=
+ margin:0px; padding-left:0.375em">
+<p style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; margi=
+n:0px">The Cuddle Pirates stumble upon a group of dream travelers who have =
+become stranded in the dream world. They must help the travelers find their=
+ way back to the waking world before
+ they become trapped in the dream world forever.</p>
+</li></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<br>
+</div>
+<div id=3D"x_m_-7018418840395248857appendonsend"></div>
+<hr style=3D"display:inline-block; width:98%">
+<div id=3D"x_m_-7018418840395248857divRplyFwdMsg" dir=3D"ltr"><font face=3D=
+"Calibri, sans-serif" color=3D"#000000" style=3D"font-size:11pt"><b>From:</=
+b> andrew rose<br>
+<b>Sent:</b> Sunday, May 7, 2023 12:04 PM<br>
+<b>To:</b> Jess Schulte &lt;<a href=3D"mailto:jschulte78@gmail.com" target=
+=3D"_blank" rel=3D"noreferrer">jschulte78@gmail.com</a>&gt;;
+<a href=3D"mailto:valverde117@gmail.com" target=3D"_blank" rel=3D"noreferre=
+r">valverde117@gmail.com</a> &lt;<a href=3D"mailto:valverde117@gmail.com" t=
+arget=3D"_blank" rel=3D"noreferrer">valverde117@gmail.com</a>&gt;<br>
+<b>Subject:</b> more Cuddle Pirate notes</font>
+<div>&nbsp;</div>
+</div>
+<div dir=3D"ltr">
+<div style=3D"font-family:Calibri,Helvetica,sans-serif; font-size:12pt; col=
+or:rgb(0,0,0)">
+<div style=3D"border-width:0px 0px 1px; border-style:solid; border-color:rg=
+ba(0,0,0,0.1); box-sizing:border-box; font-size:14px">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; mar=
+gin:auto; display:flex; padding:1.5rem 0px; font-size:1rem; line-height:1.5=
+rem; max-width:48rem">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex">
+<span style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; di=
+splay:flex; min-height:20px">I input the notes that I sent you about the Cu=
+ddle Pirates crew into ChatGPT and asked it to come up with some story idea=
+s.&nbsp; The first one it came up with,
+ about Max, was kinda interesting.&nbsp; Not sure where it was going with t=
+he second idea:<br>
+<br>
+</span></div>
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex">
+<span style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; di=
+splay:flex; min-height:20px"><br>
+</span></div>
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex">
+<span style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; di=
+splay:flex; min-height:20px"><br>
+</span></div>
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex">
+<span style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; di=
+splay:flex; min-height:20px">Combine the description of all of the Cuddle P=
+irates characters, their ship and home island, along with their mission, an=
+d the story of Juniper</span></div>
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; mar=
+gin-top:0px; display:flex; padding-left:0.5rem">
+<button style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; =
+font-size:16px; margin:0px; padding:0.25rem; background-image:none; border-=
+radius:0.375rem">
+<span height=3D"1em" width=3D"1em"><span></span><span></span></span></butto=
+n></div>
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:block">
+</div>
+</div>
+</div>
+</div>
+<div style=3D"border-width:0px 0px 1px; border-style:solid; border-color:rg=
+ba(0,0,0,0.1); box-sizing:border-box; font-size:14px">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; mar=
+gin:auto; display:flex; padding:1.5rem 0px; font-size:1rem; line-height:1.5=
+rem; max-width:48rem">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex; height:30px; border-radius:0.125rem; padding:0.25rem; background=
+-color:rgb(16,163,127)">
+<span width=3D"41" height=3D"41"><span>ChatGPT</span><span></span></span></=
+div>
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex; font-size:0.75rem; line-height:1rem">
+<button disabled=3D"" style=3D"border:0px solid rgb(217,217,227); box-sizin=
+g:border-box; font-size:12px; margin:0px; background-image:none">
+<span height=3D"1em" width=3D"1em"><span></span></span></button><span style=
+=3D"border:0px solid rgb(217,217,227); box-sizing:border-box"></span>
+<button disabled=3D"" style=3D"border:0px solid rgb(217,217,227); box-sizin=
+g:border-box; font-size:12px; margin:0px; background-image:none">
+<span height=3D"1em" width=3D"1em"><span></span></span></button></div>
+</div>
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex; min-height:20px">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; max=
+-width:none; line-height:1.75">
+<p style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; margi=
+n:0px 0px 1.25em">
+The Cuddle Pirates were a merry band of plushie pirates who roamed the seas=
+ of dreams, commandeering bedtime and putting on shows for little children =
+in the middle of the night. They were led by Sir Fuzzy Drake, a fearless an=
+d fluffy captain, and his trusty
+ crew of Marco Pillow, Vasco Pajamas, Long John Snuggle, Plushy de Leon, Fe=
+athernand Magellan, Anne Bunny, and Jean LaFluffe.</p>
+<p style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; margi=
+n:1.25em 0px">
+Their ship, The Fluffy Dutchman, was a magical vessel that could transform =
+into a giant pillowcase, with the legs of the crew sticking out the bottom =
+so they could run with it when they needed to escape. The Cuddle Pirates li=
+ved on Puff-tooga, their Cuddle
+ Pirate Island, where they had built a cozy hideaway made entirely of soft,=
+ plushy materials.</p>
+<p style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; margi=
+n:1.25em 0px">
+Their mission was to protect children from the monsters that lurked in the =
+shadows of the night, and to ensure that every child had sweet dreams and a=
+ restful sleep. They would sneak into children's bedrooms, entertaining the=
+m with acrobatic ragdoll antics
+ and telling them bedtime stories, all while dodging the watchful eyes of p=
+arents.</p>
+<p style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; margi=
+n:1.25em 0px">
+One night, the Cuddle Pirates snuck into little Juniper's room and put on a=
+ show for her. While dodging Juniper's Mom so they remain invisible, they e=
+ntertained her with their acrobatic ragdoll antics show. With Mom distracte=
+d across the hall doing laundry,
+ Juniper admitted to the Cuddles that she was sad about her missing sock, a=
+nd the Cuddle Pirates told her a bedtime story, but they were interrupted b=
+y the monster under her bed, the Kraken.</p>
+<p style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; margi=
+n:1.25em 0px">
+The Cuddle Pirates sprang into action, brandishing their plushie swords and=
+ shields, and battled the Kraken to protect Juniper. With the monster vanqu=
+ished, the pirates searched for Juniper's missing sock and found it hidden =
+in the laundry basket. Juniper was
+ overjoyed and thanked the Cuddle Pirates for their help.</p>
+<p style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; margi=
+n:1.25em 0px">
+The Cuddle Pirates reminded Juniper to keep believing in the magic of bedti=
+me, and promised to always be there to protect her. With a smile on her fac=
+e and her missing sock back where it belonged, Juniper drifted off to sleep=
+, feeling safe and loved by her
+ new friends, the Cuddle Pirates.</p>
+<p style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; margi=
+n:1.25em 0px 0px">
+The Cuddle Pirates sailed off into the night, their fluffy plunder of comfi=
+est pillows and softest blankies in all the world safe in their pillowcase =
+ship, The Fluffy Dutchman. As they returned to Puff-tooga, they laughed and=
+ joked about the night's adventure,
+ looking forward to their next mission to protect the dreams of children ev=
+erywhere.</p>
+</div>
+</div>
+</div>
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:block">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; mar=
+gin-top:0px; display:flex; padding-left:0.5rem">
+<button style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; =
+font-size:16px; margin:0px 0px 0px auto; padding:0.25rem; background-image:=
+none; display:flex; height:24px; width:24px; border-radius:0.375rem">
+<span height=3D"1em" width=3D"1em"><span></span><span width=3D"8" height=3D=
+"4"></span></span>
+</button><button style=3D"border:0px solid rgb(217,217,227); box-sizing:bor=
+der-box; font-size:16px; margin:0px; padding:0.25rem; background-image:none=
+; border-radius:0.375rem">
+<span height=3D"1em" width=3D"1em"><span></span></span></button><button sty=
+le=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; font-size:1=
+6px; margin:0px; padding:0.25rem; background-image:none; border-radius:0.37=
+5rem">
+<span height=3D"1em" width=3D"1em"><span></span></span></button></div>
+</div>
+</div>
+</div>
+</div>
+<div style=3D"border-width:0px 0px 1px; border-style:solid; border-color:rg=
+ba(0,0,0,0.1); box-sizing:border-box; font-size:14px">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; mar=
+gin:auto; display:flex; padding:1.5rem 0px; font-size:1rem; line-height:1.5=
+rem; max-width:48rem">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex">
+<span style=3D"box-sizing:border-box; display:inline-block; overflow:hidden=
+; background:none; opacity:1; margin:0px; max-width:100%"><span style=3D"bo=
+x-sizing:border-box; display:block; background:none; opacity:1; margin:0px;=
+ max-width:100%"><img alt=3D"" src=3D"cid:923ccc66-4e46-4bd0-9254-adc0b9b58=
+82e" style=3D"box-sizing:border-box; display:block; vertical-align:middle; =
+max-width:100%; background:none; opacity:1; margin:0px"></span><img alt=3D"=
+User" src=3D"https://chat.openai.com/_next/image?url=3Dhttps%3A%2F%2Fs.grav=
+atar.com%2Favatar%2F818fb4233b230c268d98e9606842fe74%3Fs%3D480%26r%3Dpg%26d=
+%3Dhttps%253A%252F%252Fcdn.auth0.com%252Favatars%252Fan.png&amp;w=3D96&amp;=
+q=3D75" style=3D"border:none; box-sizing:border-box; display:block; vertica=
+l-align:middle; height:0px; max-width:100%; border-radius:0.125rem; margin:=
+auto; width:0px; min-width:100%; min-height:100%; max-height:100%"></span><=
+/div>
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex; font-size:0.75rem; line-height:1rem">
+<button disabled=3D"" style=3D"border:0px solid rgb(217,217,227); box-sizin=
+g:border-box; font-size:12px; margin:0px; background-image:none">
+<span height=3D"1em" width=3D"1em"><span></span></span></button><span style=
+=3D"border:0px solid rgb(217,217,227); box-sizing:border-box"></span>
+<button disabled=3D"" style=3D"border:0px solid rgb(217,217,227); box-sizin=
+g:border-box; font-size:12px; margin:0px; background-image:none">
+<span height=3D"1em" width=3D"1em"><span></span></span></button></div>
+</div>
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex; min-height:20px">
+Give me a synopsis for another short story of the Cuddle Pirates adventures=
+</div>
+</div>
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; mar=
+gin-top:0px; display:flex; padding-left:0.5rem">
+<button style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; =
+font-size:16px; margin:0px; padding:0.25rem; background-image:none; border-=
+radius:0.375rem">
+<span height=3D"1em" width=3D"1em"><span></span><span></span></span></butto=
+n></div>
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:block">
+</div>
+</div>
+</div>
+</div>
+<div style=3D"border-width:0px 0px 1px; border-style:solid; border-color:rg=
+ba(0,0,0,0.1); box-sizing:border-box; font-size:14px">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; mar=
+gin:auto; display:flex; padding:1.5rem 0px; font-size:1rem; line-height:1.5=
+rem; max-width:48rem">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex; height:30px; border-radius:0.125rem; padding:0.25rem; background=
+-color:rgb(16,163,127)">
+<span width=3D"41" height=3D"41"><span>ChatGPT</span><span></span></span></=
+div>
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex; font-size:0.75rem; line-height:1rem">
+<button disabled=3D"" style=3D"border:0px solid rgb(217,217,227); box-sizin=
+g:border-box; font-size:12px; margin:0px; background-image:none">
+<span height=3D"1em" width=3D"1em"><span></span></span></button><span style=
+=3D"border:0px solid rgb(217,217,227); box-sizing:border-box"></span>
+<button disabled=3D"" style=3D"border:0px solid rgb(217,217,227); box-sizin=
+g:border-box; font-size:12px; margin:0px; background-image:none">
+<span height=3D"1em" width=3D"1em"><span></span></span></button></div>
+</div>
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex; min-height:20px">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; max=
+-width:none; line-height:1.75">
+<p style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; margi=
+n:0px 0px 1.25em">
+The Cuddle Pirates are on a mission to help a little boy named Max, who is =
+having trouble sleeping due to nightmares. They sneak into his room and dis=
+cover that Max's dreams are being haunted by a fierce dragon. The Cuddle Pi=
+rates quickly come up with a plan
+ to help Max face his fears and defeat the dragon.</p>
+<p style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; margi=
+n:1.25em 0px">
+They create a magical potion made of warm milk and honey, which they give t=
+o Max to help him relax and fall asleep. As Max drifts off, the Cuddle Pira=
+tes use their plushie swords and shields to conjure up a dream world where =
+Max can face the dragon and defeat
+ it in battle.</p>
+<p style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; margi=
+n:1.25em 0px">
+Max is nervous at first, but with the encouragement of the Cuddle Pirates, =
+he finds the courage to face the dragon head-on. They battle fiercely, but =
+Max ultimately emerges victorious. As he wakes up, Max is filled with a sen=
+se of accomplishment and pride,
+ and thanks the Cuddle Pirates for helping him conquer his fears.</p>
+<p style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; margi=
+n:1.25em 0px 0px">
+The Cuddle Pirates bid Max farewell and sail off into the night, their fluf=
+fy plunder safe in their pillowcase ship, The Fluffy Dutchman. They look fo=
+rward to their next mission to protect the dreams of children everywhere.</=
+p>
+</div>
+</div>
+</div>
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:block">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; mar=
+gin-top:0px; display:flex; padding-left:0.5rem">
+<button style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; =
+font-size:16px; margin:0px 0px 0px auto; padding:0.25rem; background-image:=
+none; display:flex; height:24px; width:24px; border-radius:0.375rem">
+<span height=3D"1em" width=3D"1em"><span></span><span width=3D"8" height=3D=
+"4"></span></span>
+</button><button style=3D"border:0px solid rgb(217,217,227); box-sizing:bor=
+der-box; font-size:16px; margin:0px; padding:0.25rem; background-image:none=
+; border-radius:0.375rem">
+<span height=3D"1em" width=3D"1em"><span></span></span></button><button sty=
+le=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; font-size:1=
+6px; margin:0px; padding:0.25rem; background-image:none; border-radius:0.37=
+5rem">
+<span height=3D"1em" width=3D"1em"><span></span></span></button></div>
+</div>
+</div>
+</div>
+</div>
+<div style=3D"border-width:0px 0px 1px; border-style:solid; border-color:rg=
+ba(0,0,0,0.1); box-sizing:border-box; font-size:14px">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; mar=
+gin:auto; display:flex; padding:1.5rem 0px; font-size:1rem; line-height:1.5=
+rem; max-width:48rem">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex">
+<span style=3D"box-sizing:border-box; display:inline-block; overflow:hidden=
+; background:none; opacity:1; margin:0px; max-width:100%"><span style=3D"bo=
+x-sizing:border-box; display:block; background:none; opacity:1; margin:0px;=
+ max-width:100%"><img alt=3D"" src=3D"cid:6212afd9-a962-44fe-8095-62633d6c9=
+7ff" style=3D"box-sizing:border-box; display:block; vertical-align:middle; =
+max-width:100%; background:none; opacity:1; margin:0px"></span><img alt=3D"=
+User" src=3D"https://chat.openai.com/_next/image?url=3Dhttps%3A%2F%2Fs.grav=
+atar.com%2Favatar%2F818fb4233b230c268d98e9606842fe74%3Fs%3D480%26r%3Dpg%26d=
+%3Dhttps%253A%252F%252Fcdn.auth0.com%252Favatars%252Fan.png&amp;w=3D96&amp;=
+q=3D75" style=3D"border:none; box-sizing:border-box; display:block; vertica=
+l-align:middle; height:0px; max-width:100%; border-radius:0.125rem; margin:=
+auto; width:0px; min-width:100%; min-height:100%; max-height:100%"></span><=
+/div>
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex; font-size:0.75rem; line-height:1rem">
+<button disabled=3D"" style=3D"border:0px solid rgb(217,217,227); box-sizin=
+g:border-box; font-size:12px; margin:0px; background-image:none">
+<span height=3D"1em" width=3D"1em"><span></span></span></button><span style=
+=3D"border:0px solid rgb(217,217,227); box-sizing:border-box"></span>
+<button disabled=3D"" style=3D"border:0px solid rgb(217,217,227); box-sizin=
+g:border-box; font-size:12px; margin:0px; background-image:none">
+<span height=3D"1em" width=3D"1em"><span></span></span></button></div>
+</div>
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex; min-height:20px">
+That is a great start, write another synopsis for the Cuddle Pirates</div>
+</div>
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; mar=
+gin-top:0px; display:flex; padding-left:0.5rem">
+<button style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; =
+font-size:16px; margin:0px; padding:0.25rem; background-image:none; border-=
+radius:0.375rem">
+<span height=3D"1em" width=3D"1em"><span></span><span></span></span></butto=
+n></div>
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:block">
+</div>
+</div>
+</div>
+</div>
+<div style=3D"border-width:0px 0px 1px; border-style:solid; border-color:rg=
+ba(0,0,0,0.1); box-sizing:border-box; font-size:14px">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; mar=
+gin:auto; display:flex; padding:1.5rem 0px; font-size:1rem; line-height:1.5=
+rem; max-width:48rem">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex; height:30px; border-radius:0.125rem; padding:0.25rem; background=
+-color:rgb(16,163,127)">
+<span width=3D"41" height=3D"41"><span>ChatGPT</span><span></span></span></=
+div>
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex; font-size:0.75rem; line-height:1rem">
+<button disabled=3D"" style=3D"border:0px solid rgb(217,217,227); box-sizin=
+g:border-box; font-size:12px; margin:0px; background-image:none">
+<span height=3D"1em" width=3D"1em"><span></span></span></button><span style=
+=3D"border:0px solid rgb(217,217,227); box-sizing:border-box"></span>
+<button disabled=3D"" style=3D"border:0px solid rgb(217,217,227); box-sizin=
+g:border-box; font-size:12px; margin:0px; background-image:none">
+<span height=3D"1em" width=3D"1em"><span></span></span></button></div>
+</div>
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; dis=
+play:flex; min-height:20px">
+<div style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; max=
+-width:none; line-height:1.75">
+<p style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; margi=
+n:0px 0px 1.25em">
+Sure, here's another synopsis for a Cuddle Pirates adventure:</p>
+<p style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; margi=
+n:1.25em 0px">
+The Cuddle Pirates are called upon by a group of stuffed animal friends to =
+help save their beloved toy store from closing down. The toy store has been=
+ struggling to stay afloat due to increased competition from online retaile=
+rs.</p>
+<p style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; margi=
+n:1.25em 0px">
+The Cuddle Pirates hatch a plan to create a grand display in the toy store'=
+s window, featuring all of the store's most popular toys. They work tireles=
+sly through the night, setting up the display and making sure everything lo=
+oks perfect.</p>
+<p style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; margi=
+n:1.25em 0px">
+The next morning, passersby are drawn to the colorful window display and fl=
+ock to the toy store to check it out. Business at the store picks up, and t=
+he Cuddle Pirates are delighted to see the smiles on the faces of children =
+and parents alike.</p>
+<p style=3D"border:0px solid rgb(217,217,227); box-sizing:border-box; margi=
+n:1.25em 0px 0px">
+As a token of their appreciation, the stuffed animal friends present the Cu=
+ddle Pirates with a special treasure - a rare plushie unicorn that had been=
+ missing from the store for years. The Cuddle Pirates are thrilled with the=
+ir new addition to the crew, and
+ sail off into the night, happy to have saved the toy store and made so man=
+y new friends along the way.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<br>
+</div>
+<div>
+<div style=3D"font-family:Calibri,Helvetica,sans-serif; font-size:12pt; col=
+or:rgb(0,0,0)">
+<br>
+</div>
+<div id=3D"x_m_-7018418840395248857x_Signature">
+<div>
+<div></div>
+<div></div>
+<div id=3D"x_m_-7018418840395248857x_divtagdefaultwrapper" dir=3D"ltr" styl=
+e=3D"font-size:12pt; font-family:Calibri,Helvetica,sans-serif; color:rgb(0,=
+0,0)">
+<span style=3D"font-size:15px; line-height:21.3px; color:rgb(68,68,68); bac=
+kground-color:rgb(255,255,255)"></span>
+<p style=3D"box-sizing:border-box; margin:0px 0px 10px; text-align:start; f=
+ont-family:Helvetica,sans-serif; font-size:12px; line-height:14px; color:rg=
+b(51,51,51); background-color:rgb(255,255,255)">
+<strong style=3D"box-sizing:border-box; font-weight:bold"><span style=3D"bo=
+x-sizing:border-box">Andrew Rose</span></strong><span>&nbsp;</span><span st=
+yle=3D"box-sizing:border-box">/ Virtual Production - Performance Capture Sp=
+ecialist</span></p>
+<p style=3D"box-sizing:border-box; margin:0px 0px 10px; text-align:start; f=
+ont-family:Helvetica,sans-serif; font-size:12px; line-height:14px; color:rg=
+b(51,51,51); background-color:rgb(255,255,255)">
+<span style=3D"box-sizing:border-box"><a href=3D"mailto:andrewlrose@hotmail=
+.com" target=3D"_blank" rel=3D"noreferrer" style=3D"box-sizing:border-box; =
+background:transparent; color:rgb(66,139,202)">andrewlrose@hotmail.com</a><=
+/span><span>&nbsp;</span><span style=3D"box-sizing:border-box">/
+ 3106214166</span></p>
+<p style=3D"box-sizing:border-box; text-align:start; font-family:Helvetica,=
+sans-serif; font-size:12px; line-height:14px; color:rgb(51,51,51); backgrou=
+nd-color:rgb(255,255,255)">
+<span style=3D"box-sizing:border-box"><a href=3D"https://signature-maker.ne=
+t/linkedin.com/in/andrewlrose" originalsrc=3D"https://signature-maker.net/l=
+inkedin.com/in/andrewlrose" shash=3D"NRRk+a5shjUGvxvXlCWj6S8muYVOOepGwa+YW1=
+jD/OH+NJ3MacJxBFbTlgUIByRGjNhLMimvhD2tWLxGqm8C0mnXkOrqMbgB1qIdoVJum/otWBbMt=
+0jlxAHDzC2DS09WaYQHpBBPStH3n6zHnfdN31hZg+MIoynToxFfijwi4wU=3D" rel=3D"nofol=
+low noreferrer" target=3D"_blank" style=3D"box-sizing:border-box; backgroun=
+d:transparent; color:rgb(66,139,202)">linkedin.com/in/andrewlrose</a></span=
+><span>&nbsp;</span><br style=3D"box-sizing:border-box">
+<span style=3D"box-sizing:border-box; font-size:10px; margin:5px 0px; displ=
+ay:block; opacity:0.8"></span></p>
+<span style=3D"font-size:15px; line-height:21.3px; color:rgb(68,68,68); bac=
+kground-color:rgb(255,255,255)"></span><br>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</blockquote>
+</div>
+</div>
+</body>
+</html>
+
+--_000_IA1PR12MB63071798E888AA9F71C44A2FA3272IA1PR12MB6307namp_--
+
+--_006_IA1PR12MB63071798E888AA9F71C44A2FA3272IA1PR12MB6307namp_
+Content-Type: image/svg+xml; name="Outlook-3zekd4wa"
+Content-Description: Outlook-3zekd4wa
+Content-Disposition: attachment; filename="Outlook-3zekd4wa"; size=78;
+	creation-date="Mon, 08 May 2023 20:04:29 GMT";
+	modification-date="Fri, 08 Mar 2024 05:42:41 GMT"
+Content-ID: <187fcec02404efae1271>
+Content-Transfer-Encoding: base64
+
+PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZlcnNpb249JzEuMScgd2lk
+dGg9JzM4JyBoZWlnaHQ9JzM4Jy8+
+
+--_006_IA1PR12MB63071798E888AA9F71C44A2FA3272IA1PR12MB6307namp_
+Content-Type: image/svg+xml; name="Outlook-ksiy53wp"
+Content-Description: Outlook-ksiy53wp
+Content-Disposition: attachment; filename="Outlook-ksiy53wp"; size=78;
+	creation-date="Mon, 08 May 2023 20:04:29 GMT";
+	modification-date="Fri, 08 Mar 2024 05:42:41 GMT"
+Content-ID: <187fcec02409d745d8f2>
+Content-Transfer-Encoding: base64
+
+PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZlcnNpb249JzEuMScgd2lk
+dGg9JzM4JyBoZWlnaHQ9JzM4Jy8+
+
+--_006_IA1PR12MB63071798E888AA9F71C44A2FA3272IA1PR12MB6307namp_
+Content-Type: image/svg+xml; name="Outlook-3zekd4wa"
+Content-Description: Outlook-3zekd4wa
+Content-Disposition: attachment; filename="Outlook-3zekd4wa"; size=78;
+	creation-date="Mon, 08 May 2023 20:04:29 GMT";
+	modification-date="Fri, 08 Mar 2024 05:42:41 GMT"
+Content-ID: <CE3FCA2D04FEEB4F83B43480E8738714@namprd12.prod.outlook.com>
+Content-Transfer-Encoding: base64
+
+PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZlcnNpb249JzEuMScgd2lk
+dGg9JzM4JyBoZWlnaHQ9JzM4Jy8+
+
+--_006_IA1PR12MB63071798E888AA9F71C44A2FA3272IA1PR12MB6307namp_--
