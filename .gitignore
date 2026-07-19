@@ -41,3 +41,8 @@ __MACOSX/
 *.blend2
 *.ma~
 *.mb.bak
+
+# email intake sources - quarantined S270, do not track
+*.eml
+# large midjourney concept selection - kept local, too big for git (158MB)
+concept/intake/midjourney_selection_2023-5-7_195241_*/

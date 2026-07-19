@@ -1,0 +1,50 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>CuddlePirates — Operating Guide</title><style>
+body{margin:0;background:#f6f8fb;color:#172033;font:16px/1.55 "Segoe UI",system-ui,sans-serif}main{max-width:1120px;margin:0 auto;padding:42px 28px 64px}h1{color:#0b3b63;font-size:2rem;line-height:1.15}h2{color:#174d75;border-bottom:1px solid #d9e3ee;padding-bottom:.25rem;margin-top:2rem}table{border-collapse:collapse;width:100%;background:white;margin:1rem 0;box-shadow:0 1px 2px #0f172a14}th,td{border:1px solid #d8e1eb;padding:.55rem .65rem;text-align:left;vertical-align:top}th{background:#eaf2f9}tr:nth-child(even) td{background:#fbfdff}code{background:#eaf0f6;border:1px solid #d7e1eb;border-radius:4px;padding:.05rem .28rem}.meta{color:#61708a;font-style:italic}.callout{background:#eef7f6;border-left:4px solid #00a99d;padding:.7rem 1rem;border-radius:0 6px 6px 0;margin:1rem 0}
+</style></head><body><main>
+<h1>CuddlePirates — Operating Guide</h1>
+<p class="meta">Fable creative/business portfolio audit — deep pass, 2026-07-07. Creative workflow with a light tooling layer — no dashboard or CLI of its own; the "interface" is folders, documents, and conventions.</p>
+
+<h2>The day-to-day workflow</h2>
+<ol>
+<li><strong>New ideas and notes</strong> → drop into <code>concept/intake/</code> (the designated drop zone). Nothing in intake is canon — it's raw input awaiting analysis.</li>
+<li><strong>Concept art</strong> → Midjourney (2023 vintage) or, going forward, ComfyUI via Volta. Source images live in the OneDrive reference roots and are <em>referenced</em> by <code>concept/inventory.json</code> — reference, don't copy into the repo.</li>
+<li><strong>Story development</strong> → <code>story-bible/</code> Markdown files. <strong>Canon changes are human-only</strong> — AI sessions propose in conversation; Andy edits/locks the files.</li>
+<li><strong>Scripts and boards</strong> → spec scripts as PDF (e.g. "Laundry Day"), storyboard keyframes under <code>docs/</code>.</li>
+<li><strong>Pipeline proof</strong> → assets moving toward 3D go through <strong>Volta</strong> (<code>volta mesh</code>, QA gates, export) with the per-project catalog at <code>.volta/</code> once Volta's catalog migration lands.</li>
+<li><strong>Status to ATLAS</strong> → <code>.atlas-bridge/</code> carries health into ProjectsPM; task board is <code>TASK_BOARD.md</code>.</li>
+</ol>
+<p class="callout"><em>Plain language: three shelves — a messy inbox (<code>concept/intake/</code>), a curated reference binder (<code>inventory.json</code> pointing at OneDrive), and the official show bible (<code>story-bible/</code>, which only Andy may change). Volta is the workshop next door where approved designs get turned into 3D.</em></p>
+
+<h2>Key documents and what they rule</h2>
+<table>
+<tr><th>Document</th><th>Authority</th></tr>
+<tr><td><code>CLAUDE.md</code></td><td>Working rules for AI sessions; read first. (Audit CP-4: its "story-bible is placeholder" line is stale.)</td></tr>
+<tr><td><code>docs/round2-answers.md</code></td><td>Locked decisions from Round 2 (Sections H–M). Section G is the open blocker; K3 has a flagged conflict.</td></tr>
+<tr><td><code>concept/README.md</code></td><td>The locked visual style: stylized painterly/storybook, not photoreal.</td></tr>
+<tr><td><code>concept/inventory.json</code></td><td>Manifest of the 97 curated concept images — archetypes, prompts, source paths.</td></tr>
+<tr><td><code>story-bible/</code></td><td>Show canon. Core-5 cast locked 2026-04-25; demo hero pair still TBD.</td></tr>
+<tr><td><code>TASK_BOARD.md</code></td><td>Open work items.</td></tr>
+</table>
+
+<h2>What "working correctly" looks like</h2>
+<ul>
+<li>Nothing new is duplicated into the repo tree; new references get inventory entries instead.</li>
+<li>Story-bible edits happen only by Andy's hand (or explicit in-session approval); locked sections cite source and date.</li>
+<li>The Section G blocker stays visibly open until answered — no invented pitch copy, hero counts, or ownership language anywhere.</li>
+<li><code>.eml_quarantine/</code> stays quarantined; no personal correspondence in new material.</li>
+</ul>
+
+<h2>Manual vs. assisted</h2>
+<ul>
+<li><strong>Manual (Andy):</strong> all canon locks, HERO-tier promotions, style rulings, pitch decisions, Section G answers.</li>
+<li><strong>AI-assisted:</strong> intake analysis, character/world brainstorming, prompt-library expansion (<code>docs/AI_Prompt_Library.md</code>), continuity checks against the bible, board/beat suggestions.</li>
+<li><strong>Automated:</strong> nothing yet — automation arrives with Volta integration (catalog import, QA gates).</li>
+</ul>
+
+<h2>Current blockers (from the project's own docs)</h2>
+<ul>
+<li><strong>Section G</strong> (one-paragraph pitch, hero counts, key story moment, ownership) — everything downstream waits on it.</li>
+<li><strong>K3 conflict</strong> — "MetaHuman for heroes" vs locked stylized look; resolve alongside Section G.</li>
+<li><strong>Demo hero pair TBD</strong> — must be chosen before any rigging starts.</li>
+</ul>
+</main></body></html>

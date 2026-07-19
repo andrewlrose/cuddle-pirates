@@ -1,0 +1,27 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>CuddlePirates — Overview &amp; Recommendations</title><style>
+body{margin:0;background:#f6f8fb;color:#172033;font:16px/1.55 "Segoe UI",system-ui,sans-serif}main{max-width:1120px;margin:0 auto;padding:42px 28px 64px}h1{color:#0b3b63;font-size:2rem;line-height:1.15}h2{color:#174d75;border-bottom:1px solid #d9e3ee;padding-bottom:.25rem;margin-top:2rem}code{background:#eaf0f6;border:1px solid #d7e1eb;border-radius:4px;padding:.05rem .28rem}.meta{color:#61708a;font-style:italic}
+</style></head><body><main>
+<h1>CuddlePirates — Project Overview &amp; Recommendations Summary</h1>
+<p class="meta">Fable creative/business portfolio audit — deep pass, 2026-07-07.</p>
+
+<h2>What this project is (plain language)</h2>
+<p>CuddlePirates is an <strong>animated short in development</strong> — plush-toy pirates in fuzzy pajamas, caricatures of historical pirates (and, affectionately, of Raylan's uncles and grandpas), aimed at a 2–4 minute stylized piece. It has a second job that's just as important: it is the <strong>demo IP for Volta</strong>, Andy's virtual-production pipeline. The plan is to prove that one supervisor plus AI tools can take a show from concept art to finished short — and CuddlePirates is the show.</p>
+<p>What exists today: a locked visual style (painterly storybook, deliberately <em>not</em> photoreal), a locked core cast of five characters, a 1,266-line story bible, a spec script ("Laundry Day") with storyboards, 97 curated Midjourney concept images with a proper inventory manifest, and pitch-analysis documents. Target: pitch to the four founding principals in Q3 2026.</p>
+
+<h2>What it's trying to achieve</h2>
+<p>Two things at once: a lovable, pitchable kids' property, and living proof that the Volta pipeline works end-to-end. The project's own docs are unusually disciplined about which decisions are locked, which are open (Section G — the one-paragraph pitch and hero cast — is the standing blocker), and what no one is allowed to invent.</p>
+
+<h2>How well it's achieving that</h2>
+<p>Creatively, it's in strong shape for pre-production — real script, real boards, coherent world rules, documented decisions. Operationally there are four things worth fixing, none of them creative: family emails are only half-quarantined out of the repo and would travel with it if it were ever published (the most important finding, CP-3); the repo carries ~805MB of images including a duplicated snapshot, against its own "reference, don't copy" rule (CP-2); the declared connection to Writers_Room doesn't actually exist — canon is growing outside the family's approval-gated story engine (CP-1); and the entire visual identity traces to a single 2023 OneDrive backup folder with no second copy and no file fingerprints (CP-5/CP-6).</p>
+<p>One honest self-contradiction needs a human pass: CLAUDE.md still says the story bible is "placeholder — don't write canon yet," while the story bible itself declares the core cast locked (CP-4).</p>
+
+<h2>Recommendations summary (plain language)</h2>
+<ol>
+<li><strong>Finish the email quarantine and keep the repo private.</strong> Commit the pending deletions; family correspondence stays out of anything publishable. (CP-3 — High.)</li>
+<li><strong>Decide the Writers_Room question on purpose</strong> — plug the story bible into the shared engine, or formally declare Volta-only. (CP-1 — Medium.)</li>
+<li><strong>Cut the repo weight</strong>: one copy of the docs snapshot, not two; intake bulk lives in the referenced OneDrive roots. (CP-2 — Medium.)</li>
+<li><strong>Fingerprint and back up the concept art</strong> — fill the inventory's empty sha256 fields and copy the OneDrive source folders to the family backup drive. (CP-5/CP-6 — [Data-Ownership].)</li>
+<li><strong>Reconcile the "placeholder vs locked" contradiction</strong> and resolve the MetaHuman-vs-stylized conflict when Section G is answered. (CP-4.)</li>
+</ol>
+<p>Full detail: <code>CuddlePirates_Audit_Report.md</code> in this folder.</p>
+</main></body></html>
